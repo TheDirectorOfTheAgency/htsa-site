@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Ticket Service Academy — The Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        h1, h2, h3 {
+            font-family: Georgia, serif;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .accent {
+            color: #c9a84c;
+        }
+
+        a {
+            color: #c9a84c;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #e0c872;
+        }
+
+        button, .btn {
+            background-color: #c9a84c;
+            color: #0a0a0a;
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: system-ui, -apple-system, sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        button:hover, .btn:hover {
+            background-color: #e0c872;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section {
+            padding: 120px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 160px 0 120px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .tagline {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            color: #c9a84c;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        .hero-cta {
+            margin-top: 3rem;
+        }
+
+        .hero-cta a {
+            background-color: #c9a84c;
+            color: #0a0a0a;
+            padding: 18px 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: system-ui, -apple-system, sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-cta a:hover {
+            background-color: #e0c872;
+        }
+
+        /* Social Proof */
+        .proof-section {
+            background-color: #111111;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .proof-card {
+            padding: 2rem;
+        }
+
+        .proof-number {
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: #c9a84c;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .proof-label {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            font-weight: 400;
+        }
+
+        /* Origin Story */
+        .origin {
+            background-color: #0a0a0a;
+        }
+
+        .origin-content {
+            max-width: 800px;
+        }
+
+        .origin h2 {
+            margin-bottom: 2rem;
+        }
+
+        .origin h3 {
+            color: #c9a84c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Modules */
+        .modules-section {
+            background-color: #111111;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .module-card {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-left: 4px solid #c9a84c;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(201, 168, 76, 0.15);
+        }
+
+        .module-number {
+            color: #c9a84c;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card h3 {
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .module-card p {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing */
+        .pricing-section {
+            background-color: #0a0a0a;
+        }
+
+        .pricing-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .pricing-card {
+            background-color: #111111;
+            padding: 3rem;
+            border: 2px solid #1a1a1a;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            border-color: #c9a84c;
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            border-color: #c9a84c;
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            transform: scale(1.05);
+        }
+
+        .pricing-tier {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .pricing-price {
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            color: #c9a84c;
+            margin: 1.5rem 0;
+            font-weight: 300;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            color: #a0a0a0;
+        }
+
+        .pricing-description {
+            color: #b0b0b0;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .pricing-features {
+            text-align: left;
+            margin: 2rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .pricing-features li {
+            list-style: none;
+            padding: 0.5rem 0;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #c9a84c;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-cta {
+            margin-top: 2rem;
+        }
+
+        .pricing-cta .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #b0b0b0;
+        }
+
+        .final-cta-button {
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .hero {
+                padding: 120px 0;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .proof-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO -->
+    <section class="hero section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="tagline">High Ticket Service Academy</div>
+                <h1>You don't enroll in a course.<br>You join <span class="accent">The Agency.</span></h1>
+                <p class="hero-subtitle">Built by Marshall Wayne. $59,798 in a single month. No employees. No products. Just the system. For home service operators who are ready to dominate their market.</p>
+                <div class="hero-cta">
+                    <a href="https://www.skool.com/high-ticket-service-academy">Explore The Academy</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="proof-section section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">By The Numbers</h2>
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <div class="proof-number">$59,798</div>
+                    <div class="proof-label">Single Month Revenue<br>(With Receipts)</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-number">500K</div>
+                    <div class="proof-label">Annual Run Rate<br>as Solo Operator</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-number">0</div>
+                    <div class="proof-label">Employees<br>Just Systems</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-number">6x</div>
+                    <div class="proof-label">Industry Average<br>Price Multiplier</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORIGIN STORY -->
+    <section class="origin section">
+        <div class="container">
+            <div class="origin-content">
+                <h2>The System That Built The Mounting Man</h2>
+                <p>Marshall Wayne built The Mounting Man from zero to $500K annually in the Twin Cities as a solo operator. No employees. No investors. No products. Just positioning, systems, and execution.</p>
+                
+                <h3>This Isn't Theory</h3>
+                <p>Every tactic in this academy comes from what actually worked. The Google My Business domination strategy that filled his calendar. The paid traffic systems that scaled his revenue per job. The conversion frameworks that turned $75 jobs into $400+ jobs.</p>
+
+                <h3>Who This Is For</h3>
+                <p>You're already doing the work. You're already established. You're just not charging what you should. This academy is for home service operators who are ready to stop competing on price and start dominating on brand.</p>
+
+                <h3>What You're Actually Buying</h3>
+                <p>Access to the exact playbook. The modules walk through positioning, SEO, paid traffic, retargeting, and conversion systems. But more than that—you're buying a framework for thinking like an agency owner, not a tradesperson.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSE MODULES -->
+    <section class="modules-section section">
+        <div class="container">
+            <h2 style="text-align: center;">What's Inside</h2>
+            <p style="text-align: center; color: #a0a0a0; margin-bottom: 3rem;">Six modules + the case study that started it all</p>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-number">Module 0</div>
+                    <h3>$59,798.23 Month Case Study</h3>
+                    <p>The receipts. The breakdown. Exactly how it was built, what the spending was, what the ROI looked like. This is your proof the system works.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 1</div>
+                    <h3>Positioning — James Bond or Average Joe</h3>
+                    <p>How to stand out in a commoditized industry. The framework for building a premium brand that justifies premium pricing.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 2</div>
+                    <h3>Google My Business Domination</h3>
+                    <p>The SEO and local search strategy that fills your calendar with high-quality leads. Every tactic that moved the needle.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 3</div>
+                    <h3>Core 30 — High Level SEO Strategy</h3>
+                    <p>The 30 foundational tactics that rank you in your market. Clean, strategic, focused on ROI.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 4</div>
+                    <h3>Paid Traffic Foundations</h3>
+                    <p>How to scale with paid ads when organic isn't enough. The setup, the targeting, the systems that make it profitable.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 5</div>
+                    <h3>Retargeting & Omnipresence</h3>
+                    <p>Stay in front of prospects. The retargeting strategy that converts researchers into customers.</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-number">Module 6</div>
+                    <h3>Conversion & Sales Systems</h3>
+                    <p>From lead to booked job. The phone scripts, email sequences, and closing frameworks that move prospects.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING / VALUE LADDER -->
+    <section class="pricing-section section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 0.5rem;">Three Ways to Join</h2>
+            <div class="pricing-intro">
+                <p>Choose the level of commitment that fits where you are.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Agent -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Agent</div>
+                    <div class="pricing-price">$497</div>
+                    <div class="pricing-description">Full self-paced course + community access</div>
+                    <ul class="pricing-features">
+                        <li>All 6 modules + case study</li>
+                        <li>Self-paced learning</li>
+                        <li>Skool community access</li>
+                        <li>Lifetime course updates</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <a href="https://www.skool.com/high-ticket-service-academy" class="btn">Join as Agent</a>
+                    </div>
+                </div>
+
+                <!-- Senior Agent (Featured) -->
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Senior Agent</div>
+                    <div class="pricing-price">$1,497</div>
+                    <div class="pricing-description">Course + weekly coaching + direct access</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Agent</li>
+                        <li>Weekly coaching calls</li>
+                        <li>Text access to Marshall</li>
+                        <li>90-day onboarding</li>
+                        <li>Private community channel</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <a href="https://www.skool.com/high-ticket-service-academy" class="btn">Join as Senior Agent</a>
+                    </div>
+                </div>
+
+                <!-- Agency Live -->
+                <div class="pricing-card">
+                    <div class="pricing-tier">Agency Live</div>
+                    <div class="pricing-price">$25,000</div>
+                    <div class="pricing-description">3-day immersive + full business build</div>
+                    <ul class="pricing-features">
+                        <li>All course content</li>
+                        <li>3-day in-person experience</li>
+                        <li>Flight lesson</li>
+                        <li>Gun range experience</li>
+                        <li>Live business build with Marshall</li>
+                        <li>12-month VIP support</li>
+                    </ul>
+                    <div class="pricing-cta">
+                        <a href="https://www.skool.com/high-ticket-service-academy" class="btn">Apply for Agency Live</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta section">
+        <div class="container">
+            <h2>The Market Rewards Premium Positioning</h2>
+            <p>You can keep competing on price.<br>Or you can join The Agency.</p>
+            <div class="final-cta-button">
+                <a href="https://www.skool.com/high-ticket-service-academy" class="btn" style="padding: 20px 60px; font-size: 1.2rem;">Start Now</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
