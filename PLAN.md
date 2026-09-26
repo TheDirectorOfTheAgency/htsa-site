@@ -344,7 +344,7 @@ The root element carries `data-state`. Only one state is visible.
 | Idle | `idle` | Label `Talk to MoneyPenny`. A mic button, at least 44px. Short line: `A live voice conversation. Coaching stays in the Skool foyer.` |
 | Connecting | `connecting` | `Connecting to MoneyPenny…` The mic button is disabled. |
 | Live | `live` | `MoneyPenny is live.` An end-call button labeled `End call`. |
-| Error | `error` | One of the two messages below. A button `Try again` returns to idle. |
+| Error | `error` | The mic-blocked message, the unsupported-browser message, the busy message, or the generic connect message. A button `Try again` returns to idle. |
 
 Mic is requested only after the click. Do not call `getUserMedia` on load.
 
