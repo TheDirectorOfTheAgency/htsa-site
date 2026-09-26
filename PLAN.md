@@ -8,7 +8,7 @@ Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `ma
 
 ## Locked decisions (do not reopen)
 
-- Static Astro at the repo root on branch `mindly-astro`. One Cloudflare Pages Function at `functions/api/ask.ts`. No SSR adapter.
+- Static Astro at the repo root on branch `mindly-astro`. One Cloudflare Pages Function at `functions/api/voice-token.ts`. No SSR adapter. No AgentMail function and no email form.
 - Accent is Mounting Man yellow `#FDBE17` on black. Mindly orange is not used.
 - The offer badge is static copy: **Coaching + community foyer**. It is not a timer and it does not say “limited time”.
 - Hero image and hero video are labeled neutral placeholders. No stock photos, no face photos, no copied template media.
@@ -16,7 +16,7 @@ Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `ma
 - Primary CTA text is exactly `ENTER THE SKOOL FOYER`. Every CTA uses exactly `https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311`.
 - Proof figures are exactly `$6,458.10`, `$59,632.98`, and `$512,022.13`.
 - The packages block uses the WHOOP three-card **layout** and the live site’s **one door**. It does not invent a second or third price. The only public price range is six-week coaching `$2,000–$5,000`, with the live sentence that there is no single public price.
-- Ask MoneyPenny sends one email to MoneyPenny. It never auto-replies to the visitor.
+- The hero chat box is a live voice session with MoneyPenny, Mr. Wayne’s xAI Grok Voice Agent. It is not an email form. The browser never receives `XAI_API_KEY`. Agent id and connect method stay named config values until Q passes them from the console Deployment panel.
 - No decision is left for Mr. Wayne. The third “tier” card is a boundary card, not a product, because the live site has one door.
 
 ## Page sections
@@ -25,8 +25,8 @@ Order is top to bottom. Body below the hero is white (`#FFFFFF`). Black sections
 
 | # | Section | Component | Reference | What it contains |
 | --- | --- | --- | --- | --- |
-| 1 | Floating pill nav | `Nav.astro` + `CallButton.astro` | Mindly hero (`mindly_hero.png`, `mindly_full.png` top). Phone icon idea from Samsara. | White pill, centered, fixed. Mark “HTSA” (original wordmark, not a copied logo). Links: Curriculum, Proof, Packages, Why us, Ask. `CallButton`. Yellow pill CTA with the exact foyer label and URL. |
-| 2 | Hero | `Hero.astro`, `AskForm.astro`, `AssetSlot.astro` | Mindly hero, recolored. Yellow from `mountingman_hero.png`. | See hero anatomy below. |
+| 1 | Floating pill nav | `Nav.astro` + `CallButton.astro` | Mindly hero (`mindly_hero.png`, `mindly_full.png` top). Phone icon idea from Samsara. | White pill, centered, fixed. Mark “HTSA” (original wordmark, not a copied logo). Links: Curriculum, Proof, Packages, Why us, Talk (`#moneypenny`). `CallButton`. Yellow pill CTA with the exact foyer label and URL. |
+| 2 | Hero | `Hero.astro`, `MoneyPennyVoice.astro`, `AssetSlot.astro` | Mindly hero, recolored. Yellow from `mountingman_hero.png`. | See hero anatomy below. |
 | 3 | Proof strip | `ProofStrip.astro` | Samsara logo-bar position, directly under the hero, on white. | Three figures only, with live labels. Operator-proof line under them. |
 | 4 | Origin | `Story.astro` | Relativity left-headline / right-paragraph split, on white. | Live headline “I Was the Agency Guy. Then I Got Tired of It.” and the origin paragraphs. |
 | 5 | Fit | `Fit.astro` | White text block. | “Who This Is For” and “What You're Actually Buying”, live copy. |
@@ -34,7 +34,7 @@ Order is top to bottom. Body below the hero is white (`#FFFFFF`). Black sections
 | 7 | Field band | `FieldBand.astro` | Samsara black feature card (`samsara_body.png`): eyebrow, heavy headline, short paragraph. | Black band. Eyebrow `IN THE FIELD`. Headline from live positioning. Service line: Frame / mantel / porcelain / in-wall cable. Disclaimer that results are operator proof. |
 | 8 | One door | `Packages.astro` | WHOOP black three-card section (`whoop_body.png`). | Full-bleed black. Three cards. No invented prices. See packages copy. |
 | 9 | FAQ | `Faq.astro` | Mindly FAQ **placement only** (white, questions stacked). | Four questions whose answers are live sentences already locked below. No new claims. |
-| 10 | Close | `ClosingPair.astro`, `AskForm.astro`, `CallButton.astro` | Palantir grey + black card pair (`palantir_body.png`). | Left grey card: Ask MoneyPenny (same form). Right black card: Call now (same call control). |
+| 10 | Close | `ClosingPair.astro`, `CallButton.astro` | Palantir grey + black card pair (`palantir_body.png`). | Left grey card: “Talk to MoneyPenny”, an in-page link to `#moneypenny`. It does not mount a second voice session. Right black card: Call now (same phone `CallButton`). |
 | 11 | Sticky call | `StickyCall.astro` | WHOOP sticky bottom pill, mobile only. | Fixed bottom pill. Hidden at `min-width: 768px`. |
 | 12 | Footer | `Footer.astro` | Slim, not a second homepage. | “The Mounting Man” and “Hollywood Handyman is the teacher — not a second company.” No extra offers. |
 
@@ -46,7 +46,7 @@ Top to bottom, centered, on a near-black field:
 2. **Offer badge.** Two-part pill, static. Left: `Coaching + community foyer`. Right: `Skool foyer`. No date, no timer, no “ends in”, no “limited”.
 3. **Headline, two lines.** Line one, white: `You don't enroll in a course.` Line two: `You join ` + yellow accent `the Agency.`
 4. **Subcopy, one sentence from the live hero.** `Six-week operator coaching for home service owners. Learn the marketing, positioning, and pricing systems used at The Mounting Man, then apply them in your own business. Coaching is $2,000–$5,000. Start in the Skool foyer.`
-5. **Ask MoneyPenny card.** Dark translucent rounded rectangle (Mindly chat box). Fields: name (optional), email (required), message (required), honeypot. Submit posts to `/api/ask`. Thank-you state replaces the fields. Placeholder message: `Ask about the foyer or six-week coaching.` Do not use Mindly’s “Rewrite this response…” string.
+5. **Talk to MoneyPenny card.** One `MoneyPennyVoice` mount, `id="moneypenny"`. Same dark translucent rounded rectangle as the Mindly chat box. No name, email, or message fields. No honeypot. See “MoneyPenny voice” below. Do not use Mindly’s “Rewrite this response…” string.
 6. **CTA row.** Yellow pill `ENTER THE SKOOL FOYER` with a simple arrow (CSS or an inline SVG we draw). Beside it, three overlapping **neutral discs** (yellow, white, charcoal — no photos, no initials of real people) and a Caveat note: `Start in the foyer. Coaching is a separate step.` Do not write “1k+” or “already ahead”.
 7. **Video frame.** `AssetSlot` variant `video`. Rounded rectangle, ~16:9, max-width ~1040px, label `Hero video slot — Mr. Wayne supplies this asset`. A drawn play circle. No `<video>`, no iframe, no stock file.
 
@@ -91,7 +91,7 @@ Also keep, in the story section, the live week figure only as prose already on t
 
 ### Copy that must not appear
 
-`limited time`, `countdown`, `offer ends`, `spots left`, `coupon`, `discount`, `% off`, `AI team` as something we install (the disclaimer sentence above is allowed), `done-for-you` as a promise (the disclaimer is allowed), stub prices, Mindly course copy, “Master Prompt Engineering”, “$499”.
+`limited time`, `countdown`, `offer ends`, `spots left`, `coupon`, `discount`, `% off`, `AI team` as something we install (the disclaimer sentence above is allowed), `done-for-you` as a promise (the disclaimer is allowed), stub prices, Mindly course copy, “Master Prompt Engineering”, “$499”. No email inputs, no `mailto:`, no AgentMail, and no `XAI_API_KEY` in the built site.
 
 ## Design tokens
 
@@ -149,7 +149,7 @@ Load with `@fontsource` packages (OFL). Do not ship Omakase font files. Do not u
 | Section padding Y | `96px` desktop, `64px` below 768px |
 | Container | `min(1120px, calc(100% - 48px))` desktop; `calc(100% - 32px)` below 768px |
 | Hero top padding | `112px` so content clears the fixed pill |
-| Stack gap inside hero | `24px` between badge, headline, subcopy, form, CTA, video |
+| Stack gap inside hero | `24px` between badge, headline, subcopy, voice card, CTA, video |
 
 ### Radius
 
@@ -158,7 +158,7 @@ Load with `@fontsource` packages (OFL). Do not ship Omakase font files. Do not u
 | `--radius-pill` | `999px` | Nav, buttons, badge, sticky call, inputs |
 | `--radius-card` | `20px` | Package cards, closing cards, modules |
 | `--radius-frame` | `24px` | Video slot |
-| `--radius-ask` | `18px` | Ask card |
+| `--radius-ask` | `18px` | MoneyPenny voice card |
 
 ### Elevation
 
@@ -181,7 +181,7 @@ Phase 2 replaces the stub `index.html` on this branch only. `main` stays untouch
   public/
     favicon.svg                 # original geometric mark, yellow on black
   src/
-    config.ts                   # PHONE_E164, SKOOL_URL, SKOOL_CTA, proof figures
+    config.ts                   # PHONE_E164, SKOOL_URL, SKOOL_CTA, proof figures, voice config names
     layouts/Base.astro
     pages/index.astro
     styles/tokens.css
@@ -189,7 +189,7 @@ Phase 2 replaces the stub `index.html` on this branch only. `main` stays untouch
     components/
       Nav.astro
       Hero.astro
-      AskForm.astro
+      MoneyPennyVoice.astro
       AssetSlot.astro
       CallButton.astro
       StickyCall.astro
@@ -202,12 +202,13 @@ Phase 2 replaces the stub `index.html` on this branch only. `main` stays untouch
       Faq.astro
       ClosingPair.astro
       Footer.astro
-    lib/ask-contract.ts         # shared field names + limits, no I/O
+    scripts/moneypenny-voice.ts # client island: states, mic, adapter calls
+    lib/voice-adapter.ts        # transport interface; websocket | webrtc | embed
   functions/
-    api/ask.ts
-    lib/handle-ask.ts           # pure handler, fetch injected, unit-tested
+    api/voice-token.ts
+    lib/handle-voice-token.ts   # pure handler, fetch injected, unit-tested
   tests/
-    ask.test.ts
+    voice-token.test.ts
     visual.spec.ts
   playwright.config.ts
 ```
@@ -228,7 +229,17 @@ export const PROOF = [
   { figure: "$59,632.98", label: "Best month, 2024-12" },
   { figure: "$512,022.13", label: "Best year, 2024" },
 ] as const;
+
+/**
+ * Named config only. Q sets the real values from the xAI console
+ * Deployment panel before phase 2 wires audio. Empty until then.
+ * The API key is never a field here.
+ */
+export const VOICE_AGENT_ID = "";
+export const VOICE_CONNECT_METHOD = "" as "" | "websocket" | "webrtc" | "embed";
 ```
+
+`VOICE_AGENT_ID` and `VOICE_CONNECT_METHOD` are the names phase 2 reads. The Pages Function does not trust the client copy: it reads `XAI_VOICE_AGENT_ID` and `XAI_VOICE_CONNECT_METHOD` from the runtime env, which Q sets to the same values. The static page may show the agent id (it is not a secret). It must not show the API key.
 
 `CallButton.astro` reads `PHONE_E164` once. If it is a non-empty string matching `^\+[1-9]\d{7,14}$`, render `<a href={"tel:" + PHONE_E164}>Call MoneyPenny</a>`. Otherwise render `<button type="button" disabled>Number coming soon</button>` and do not emit `tel:`.
 
@@ -238,7 +249,7 @@ export const PROOF = [
 - `npm` is the package manager. Node 22.
 - `astro.config.mjs` sets `site` only as a placeholder comment; canonical URL is whatever Pages preview Q gets. Do not hardcode the Webflow domain as the deploy target.
 - `wrangler.toml`: `pages_build_output_dir = "dist"`, `compatibility_date = "2026-09-01"`. No secrets in the file.
-- `.dev.vars.example` lists empty `AGENTMAIL_API_KEY`, `ASK_FROM_INBOX=agency-q@agentmail.to`, `ASK_TO_ADDRESS=agency-moneypenny@agentmail.to`. Real values stay in the Pages dashboard and in local `.dev.vars` (gitignored).
+- `.dev.vars.example` lists empty `XAI_API_KEY`, `XAI_VOICE_AGENT_ID`, and `XAI_VOICE_CONNECT_METHOD`. Real values stay in the Pages dashboard and in local `.dev.vars` (gitignored). Do not commit a key.
 - `.gitignore`: `node_modules`, `dist`, `.astro`, `.env`, `.dev.vars`, `artifacts`, `.wrangler`. Keep ignoring `.vercel` if the stub ignore remains, but do not add a Vercel project.
 
 ### Scripts
@@ -260,93 +271,110 @@ export const PROOF = [
 
 Dependencies to add, nothing else: `astro`, `typescript`, `@fontsource/inter-tight`, `@fontsource/ibm-plex-mono`, `@fontsource/caveat`, `vitest`, `@cloudflare/workers-types`, `playwright` (dev). Wrangler via `npx wrangler` for the optional manual pass, pinned as a devDependency.
 
-## Pages Function contract
+## MoneyPenny voice
 
-Route: `POST /api/ask` → `functions/api/ask.ts`.
+Checked against xAI’s public docs on 2026-09-26:
 
-`GET` and other methods: `405` and `{ "ok": false, "error": "method" }`.
+- Voice overview and speech-to-speech: https://docs.x.ai/developers/model-capabilities/audio/speech-to-speech
+- Ephemeral tokens: https://docs.x.ai/developers/model-capabilities/audio/ephemeral-tokens
+- REST `POST /v1/realtime/client_secrets`: https://docs.x.ai/developers/rest-api-reference/inference/voice
 
-### Request
+What those pages actually specify:
 
-`Content-Type: application/json`. Reject non-JSON with `400`.
+- Browser clients authenticate a realtime session with a short-lived ephemeral token. The long-lived API key is server-only.
+- Mint: `POST https://api.x.ai/v1/realtime/client_secrets` with `Authorization: Bearer $XAI_API_KEY` and JSON `{ "expires_after": { "seconds": 300 } }`.
+- Success body: `{ "value": "<ephemeral token>", "expires_at": <unix seconds> }`.
+- Browsers cannot set an `Authorization` header on `WebSocket`. The documented browser connect is `new WebSocket("wss://api.x.ai/v1/realtime", ["xai-client-secret." + token])`. A model query (`?model=grok-voice-latest`) is also documented for direct sessions.
+- The REST reference allows an optional `session` object (`model`, `reasoning.effort`) on the mint call. The ephemeral-token guide says that call does not accept `session`. Phase 2 sends only `expires_after` unless Q’s deployment note says to bind `session`.
+- `agent_id` appears on xAI phone-number routing. It is not a field on `client_secrets`. Public docs do not publish a console embed snippet or a browser WebRTC signaling URL for a saved Voice Agent.
+- xAI also ships sample apps named Web Agent (WebSocket) and WebRTC Agent. Do not copy those repos. Use the public API.
 
-```json
-{
-  "name": "optional string",
-  "email": "required string",
-  "message": "required string",
-  "pageUrl": "optional string",
-  "company": ""
+Q will pass the agent id and the Deployment method (`websocket`, `webrtc`, or `embed`) before implementation wires audio. Those stay named values. Do not guess a WebRTC or embed payload.
+
+### Component
+
+`MoneyPennyVoice.astro` plus `src/scripts/moneypenny-voice.ts`. One instance, in the hero. The script talks only to `VoiceAdapter` in `src/lib/voice-adapter.ts`:
+
+```ts
+export type VoiceConnectMethod = "websocket" | "webrtc" | "embed";
+
+export interface VoiceAdapter {
+  connect(session: { token: string; expiresAt: number; agentId: string; method: VoiceConnectMethod }): Promise<void>;
+  hangUp(): void;
 }
 ```
 
-| Field | Rule |
-| --- | --- |
-| `name` | Optional. Trim. Max 120. Empty becomes omitted in the email body as `(not given)`. |
-| `email` | Required. Trim. Max 254. Must match `^[^\s@]+@[^\s@]+\.[^\s@]+$`. This address is Reply-To only. |
-| `message` | Required. Trim. Length 1–4000. |
-| `pageUrl` | Optional. If present, max 2000 and must start with `http://` or `https://`. Else use the `Referer` header when it is http(s), else `(unknown)`. |
-| `company` | Honeypot. Rendered in the form, visually hidden (`position:absolute; left:-9999px`), `tabindex="-1"`, `autocomplete="off"`, label not shown to users but `aria-hidden="true"`. Humans leave it empty. |
+`createAdapter(method)` returns the transport. `websocket` is the documented path and is the one phase 2 implements in full. `webrtc` and `embed` are stub transports that reject with a clear error until Q’s deployment note fills them. Swapping method does not change the markup or the states.
 
-If the honeypot is non-empty: respond `200` `{ "ok": true }` and **do not** call AgentMail.
+Do not put instructions, tools, or a persona in the page. The console Voice Agent is the persona. The site must not promise done-for-you work or an installed AI team through a `session.update`.
 
-If validation fails: `400` `{ "ok": false, "error": "validation" }`. Do not include field values in the response.
+### States
 
-Body larger than 16 KB: `400` `{ "ok": false, "error": "validation" }`.
+The root element carries `data-state`. Only one state is visible.
+
+| State | `data-state` | What the visitor sees |
+| --- | --- | --- |
+| Idle | `idle` | Label `Talk to MoneyPenny`. A mic button, at least 44px. Short line: `A live voice conversation. Coaching stays in the Skool foyer.` |
+| Connecting | `connecting` | `Connecting to MoneyPenny…` The mic button is disabled. |
+| Live | `live` | `MoneyPenny is live.` An end-call button labeled `End call`. |
+| Error | `error` | One of the two messages below. A button `Try again` returns to idle. |
+
+Mic is requested only after the click. Do not call `getUserMedia` on load.
+
+Fallback copy, exact:
+
+- Mic blocked (`NotAllowedError` / `NotFoundError`) or no `navigator.mediaDevices`: `The microphone is blocked. Allow the microphone for this site, then try again.`
+- No `WebSocket` in the browser: `This browser can't start a voice call. Use a current version of Chrome, Safari, or Firefox.`
+
+Click flow for `websocket`: set `connecting`, then in parallel request the mic and `POST /api/voice-token` with an empty JSON body. On token success, `adapter.connect`. On socket open, set `live`. End call closes the socket, stops mic tracks, and returns to `idle`. A second click while `connecting` or `live` does nothing. Token or socket failure sets `error` with the browser message above only when the mic or WebSocket is the problem; otherwise `MoneyPenny didn't connect. Try again in a moment.`
+
+When method is `websocket`, the transport follows the public audio notes: 24 kHz PCM16 in and out, `server_vad`, and play `response.output_audio.delta` as each chunk arrives. Do not buffer a full reply before playback.
+
+### Pages Function
+
+Route: `POST /api/voice-token` → `functions/api/voice-token.ts`.
+
+`GET` and other methods: `405` `{ "ok": false, "error": "method" }`.
+
+No request fields. Ignore any body. Do not accept an API key, agent id, or method from the browser.
 
 ### Env
 
-Read only from the Pages `env` argument. If any of the three is missing or blank, respond `500` `{ "ok": false, "error": "config" }` and do not call fetch.
+Read only from the Pages `env` argument. If any value is missing or blank, respond `500` `{ "ok": false, "error": "config" }` and do not call xAI.
 
-| Name | Role | Expected value (set by Q, not hardcoded as a fallback) |
-| --- | --- | --- |
-| `AGENTMAIL_API_KEY` | Bearer secret | Pages secret |
-| `ASK_FROM_INBOX` | `inbox_id` path segment | `agency-q@agentmail.to` |
-| `ASK_TO_ADDRESS` | `to` | `agency-moneypenny@agentmail.to` |
+| Name | Role |
+| --- | --- |
+| `XAI_API_KEY` | Bearer secret. Server only. Never written to the response, logs, or `dist/`. |
+| `XAI_VOICE_AGENT_ID` | Console agent id Q supplies. Returned to the browser as `agentId`. Not sent to `client_secrets` unless Q’s deployment note adds a documented field for it. |
+| `XAI_VOICE_CONNECT_METHOD` | `websocket`, `webrtc`, or `embed`. |
 
-### AgentMail call
-
-Checked against https://docs.agentmail.to/api-reference/inboxes/messages/send on 2026-09-26.
+### xAI call (`websocket`)
 
 ```
-POST https://api.agentmail.to/v0/inboxes/{inbox_id}/messages/send
-Authorization: Bearer ${AGENTMAIL_API_KEY}
+POST https://api.x.ai/v1/realtime/client_secrets
+Authorization: Bearer ${XAI_API_KEY}
 Content-Type: application/json
+
+{ "expires_after": { "seconds": 300 } }
 ```
 
-`inbox_id` is `env.ASK_FROM_INBOX`, URL-encoded once.
+Timeout 10 seconds. One call.
 
-```json
-{
-  "to": "<ASK_TO_ADDRESS>",
-  "reply_to": "<visitor email>",
-  "subject": "HTSA site: Ask MoneyPenny",
-  "text": "Name: ...\nEmail: ...\nMessage: ...\nPage: ...\nTimestamp: <ISO-8601 UTC>\n"
-}
-```
+- xAI 200 with a non-empty string `value` and a number `expires_at`: respond `200`
 
-- Subject is exactly `HTSA site: Ask MoneyPenny`.
-- `reply_to` is the visitor email (string form is valid; docs type it as Addresses).
-- Do not set `html`, `cc`, `bcc`, `labels`, `attachments`, or `track_opens`.
-- One request only. No second call. No message to the visitor. No draft-send endpoint. MoneyPenny handles the inbox as draft-only outside this function.
-- Timeout the fetch at 10 seconds (`AbortSignal.timeout(10000)`).
-- AgentMail `200` with `message_id` and `thread_id`: respond `200` `{ "ok": true }`. Do not return `message_id` to the browser.
-- AgentMail non-200, network error, or timeout: `502` `{ "ok": false, "error": "send_failed" }`. Do not forward AgentMail’s body.
+  ```json
+  { "ok": true, "token": "<value>", "expiresAt": 1750000000, "agentId": "<XAI_VOICE_AGENT_ID>", "method": "websocket" }
+  ```
 
-### Page behavior
+  `token` is the ephemeral `value` only. Do not return the API key. Do not echo xAI’s raw body if it contains anything else.
 
-`AskForm.astro` is used in the hero and in the grey closing card. Each instance is independent.
+- xAI non-200, network error, or timeout: `502` `{ "ok": false, "error": "token_failed" }`. Do not forward xAI’s body.
 
-- Submit with `fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body })`.
-- `pageUrl` is `location.href`.
-- Disable the button while the request is in flight.
-- `ok: true`: replace the form with `MoneyPenny has it. She'll reply from here.` No claim about response time.
-- Anything else: leave the fields and show `That didn't send. Check email and message, then try again.`
-- No client-side email to anyone. No `mailto:` fallback that auto-sends.
+- Method `webrtc` or `embed`: do not invent a mint payload. Respond `501` `{ "ok": false, "error": "method_pending" }` until Q’s deployment note names the request. The function signature stays the same so the adapter can start using a token later without a new route.
 
-`functions/api/ask.ts` is a thin `onRequestPost` (and `onRequest` that rejects non-POST) calling `handleAsk({ request, env, fetch })`. Tests import `handleAsk` and pass a mock `fetch`. That keeps the gate free of a live key and free of wrangler when Vitest is enough.
+`functions/api/voice-token.ts` is a thin `onRequestPost` (and `onRequest` that rejects non-POST) calling `handleVoiceToken({ request, env, fetch })`. Tests import `handleVoiceToken` and pass a mock `fetch`. The gate does not call xAI and does not need a live key.
 
-Optional manual check, not a gate: `npx wrangler pages dev dist --compatibility-date=2026-09-01` with `.dev.vars` present, then POST a fixture. The mock must still be the automated gate so CI does not hit AgentMail.
+Optional manual check, not a gate: `npx wrangler pages dev dist` with `.dev.vars` present. The mock remains the automated gate.
 
 ## Mobile behavior
 
@@ -354,16 +382,16 @@ Breakpoint: `768px`.
 
 | Surface | Desktop (≥768) | Phone (390px wide is the check) |
 | --- | --- | --- |
-| Pill nav | Logo, five links, call control, foyer CTA. May wrap inside the pill; the pill stays inset `16px` from the viewport edges. | Drop the five text links. Keep logo, call control, and foyer CTA. Links remain in a `<details>` disclosure inside the pill so Curriculum / Proof / Packages / Why us / Ask still exist. |
+| Pill nav | Logo, five links, call control, foyer CTA. May wrap inside the pill; the pill stays inset `16px` from the viewport edges. | Drop the five text links. Keep logo, call control, and foyer CTA. Links remain in a `<details>` disclosure inside the pill so Curriculum / Proof / Packages / Why us / Talk still exist. |
 | Hero type | Two lines if the viewport allows. | Same words, wrap freely, no horizontal scroll. |
-| Ask card | Max-width `640px`, centered. | Full container width. Inputs are at least `44px` tall. |
+| Voice card | Max-width `640px`, centered. Mic and end-call controls at least 44px. | Full container width. Same control size. The sticky phone pill must not cover the mic button; hero content ends above it. |
 | CTA row | Button, discs, and note on one row. | Stack: button, then discs + note. |
 | Video slot | Max-width `1040px`. | Full container width, radius kept. |
 | Proof | Three columns. | One column, figures stacked, dividers horizontal. |
 | Story / fit | Two columns from `960px` up. | One column. |
 | Modules | Two columns, then three from `960px`. | One column. |
 | Packages | Three cards in a row. | One column, gap `16px`. |
-| Closing pair | Two equal cards, grey then black. | Stack, Ask on top, Call under it. |
+| Closing pair | Two equal cards, grey then black. | Stack, Talk on top, Call under it. |
 | Sticky call | `display: none`. | `position: fixed; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; z-index: 40`. Same `CallButton` rules. |
 | Page bottom | Normal footer padding. | Extra `padding-bottom: 88px` so the sticky control does not cover the call card or the footer. |
 
@@ -379,7 +407,7 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    npm ci && npm run build
    ```
 
-   `dist/index.html` exists. `functions/api/ask.ts` is still in the repo (Pages reads it from the project root, not from `dist`).
+   `dist/index.html` exists. `functions/api/voice-token.ts` is still in the repo (Pages reads it from the project root, not from `dist`). `functions/api/ask.ts` does not exist.
 
 2. **Dist string checks** (`node scripts/check-dist.mjs`, also invoked by `npm run gate`)
 
@@ -395,6 +423,7 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    - `Hero video slot`
    - `Coaching + community foyer`
    - `This is not a done-for-you marketing service or an installed AI operations team.`
+   - `Talk to MoneyPenny`
 
    `dist/index.html` must not contain, case-insensitive:
 
@@ -406,26 +435,29 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    - `$25,000`
    - `$59,798`
    - `tel:`
+   - `type="email"`
+   - `AGENTMAIL`
+   - `XAI_API_KEY`
+
+   The whole `dist/` tree must not contain `XAI_API_KEY` or a string matching `xai-[A-Za-z0-9]{20,}`. The ephemeral token is minted at request time and must not be baked into the build.
 
    `tel:` is forbidden only while `PHONE_E164` is null. The check reads `src/config.ts`. If the constant is still `null`, fail on `tel:`. If Q later sets a valid E.164 string, the check instead requires `href="tel:` plus that string and does not require `Number coming soon`.
 
-3. **Function unit tests**
+3. **Token function unit tests**
 
    ```bash
    npm test
    ```
 
-   Vitest, `tests/ask.test.ts`, mock `fetch`. Required cases:
+   Vitest, `tests/voice-token.test.ts`, mock `fetch`. Required cases:
 
-   - Valid body → one POST to `https://api.agentmail.to/v0/inboxes/agency-q%40agentmail.to/messages/send`, bearer header, JSON `to` equal to `agency-moneypenny@agentmail.to`, `reply_to` equal to the visitor, subject `HTSA site: Ask MoneyPenny`, text containing name, email, message, page URL, and an ISO timestamp. Response `{ ok: true }` with status 200. `fetch` called once.
-   - Visitor address is not the `to` field.
-   - Missing email, missing message, bad email → 400 `{ ok: false, error: "validation" }`, fetch not called.
-   - Honeypot `company: "http://spam.test"` → 200 `{ ok: true }`, fetch not called.
-   - Missing `AGENTMAIL_API_KEY` → 500 `{ ok: false, error: "config" }`, fetch not called.
-   - Mocked AgentMail 403 → 502 `{ ok: false, error: "send_failed" }`, fetch still once.
-   - `GET` → 405.
+   - Env method `websocket`, agent id `agent_test`, key `test-key` → one POST to `https://api.x.ai/v1/realtime/client_secrets`, bearer `test-key`, JSON body `{ "expires_after": { "seconds": 300 } }`. Mock xAI `{ "value": "ephemeral-test-token", "expires_at": 1750000000 }` → response `200` `{ "ok": true, "token": "ephemeral-test-token", "expiresAt": 1750000000, "agentId": "agent_test", "method": "websocket" }`. `fetch` called once. Response body does not contain `test-key`.
+   - Missing `XAI_API_KEY`, missing agent id, or missing method → `500` `{ "ok": false, "error": "config" }`, fetch not called.
+   - Mocked xAI `401` → `502` `{ "ok": false, "error": "token_failed" }`, fetch once, response does not contain the key or the xAI error body.
+   - Method `webrtc` or `embed` → `501` `{ "ok": false, "error": "method_pending" }`, fetch not called.
+   - `GET` → `405`.
 
-4. **Playwright screenshots**
+4. **Playwright screenshots and voice states**
 
    ```bash
    npm run build && npx playwright test
@@ -437,6 +469,13 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    - `artifacts/home-390x844.png` at viewport `390x844`
 
    Full page, not just the first viewport. The phone shot must show the sticky control. `artifacts/` is gitignored. Copy both PNGs to `/opt/cursor/artifacts/` when that directory exists so the PR walkthrough can attach them.
+
+   The same spec also renders the voice states without a live xAI session or a microphone:
+
+   - Idle, on first load: visible text `Talk to MoneyPenny` and a mic button. `data-state="idle"`.
+   - Connecting: stub `POST /api/voice-token` to a request that never finishes, click the mic, expect `Connecting to MoneyPenny…` and `data-state="connecting"`. Screenshot `artifacts/voice-connecting.png`.
+   - Error, unsupported browser: `page.addInitScript` deletes `window.WebSocket`, reload, click the mic, expect `This browser can't start a voice call. Use a current version of Chrome, Safari, or Firefox.` and `data-state="error"`. Screenshot `artifacts/voice-error.png`.
+   - Error, mic blocked: reject `getUserMedia` with `NotAllowedError` and expect `The microphone is blocked. Allow the microphone for this site, then try again.`
 
 5. **Forbidden-scope check**
 
@@ -452,5 +491,5 @@ Q deploys the `mindly-astro` branch to a Cloudflare Pages **preview** URL. Produ
 
 1. Scaffold Astro, tokens, layout, config, and the string-check script.
 2. Build sections in the order in the table, with live copy pasted from this plan.
-3. Wire `AskForm` and `handleAsk` with tests.
+3. Wire `MoneyPennyVoice`, the websocket adapter, and `handleVoiceToken` with tests. Leave `webrtc` and `embed` as the pending branches above until Q names the deployment method.
 4. Pass `npm run gate`, then Playwright, then commit on `mindly-astro` and update the draft PR. Do not merge.
