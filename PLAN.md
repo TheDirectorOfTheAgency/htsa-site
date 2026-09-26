@@ -16,7 +16,7 @@ Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `ma
 - Primary CTA text is exactly `ENTER THE SKOOL FOYER`. Every CTA uses exactly `https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311`.
 - Proof figures are exactly `$6,458.10`, `$59,632.98`, and `$512,022.13`.
 - The packages block uses the WHOOP three-card **layout** and the live site’s **one door**. It does not invent a second or third price. The only public price range is six-week coaching `$2,000–$5,000`, with the live sentence that there is no single public price.
-- The hero chat box is a live voice session with MoneyPenny, Mr. Wayne’s xAI Grok Voice Agent. It is not an email form. The browser never receives `XAI_API_KEY`. Agent id and connect method stay named config values until Q passes them from the console Deployment panel.
+- The hero chat box is a live voice session with MoneyPenny, the xAI Voice Agent `agent_hL8eOtDRQ9nF50G5` (Draft; the console deployment works while Draft). Transport is the realtime WebSocket, not an embed. The browser never receives `XAI_API_KEY`.
 - No decision is left for Mr. Wayne. The third “tier” card is a boundary card, not a product, because the live site has one door.
 
 ## Page sections
@@ -203,7 +203,7 @@ Phase 2 replaces the stub `index.html` on this branch only. `main` stays untouch
       ClosingPair.astro
       Footer.astro
     scripts/moneypenny-voice.ts # client island: states, mic, adapter calls
-    lib/voice-adapter.ts        # transport interface; websocket | webrtc | embed
+    lib/voice-adapter.ts        # websocket transport behind a swappable interface
   functions/
     api/voice-token.ts
     lib/handle-voice-token.ts   # pure handler, fetch injected, unit-tested
@@ -230,16 +230,14 @@ export const PROOF = [
   { figure: "$512,022.13", label: "Best year, 2024" },
 ] as const;
 
-/**
- * Named config only. Q sets the real values from the xAI console
- * Deployment panel before phase 2 wires audio. Empty until then.
- * The API key is never a field here.
- */
-export const VOICE_AGENT_ID = "";
-export const VOICE_CONNECT_METHOD = "" as "" | "websocket" | "webrtc" | "embed";
+/** Console Voice Agent. Not a secret. The API key is never a field here. */
+export const VOICE_AGENT_ID = "agent_hL8eOtDRQ9nF50G5";
+
+export const VOICE_REALTIME_URL =
+  "wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5";
 ```
 
-`VOICE_AGENT_ID` and `VOICE_CONNECT_METHOD` are the names phase 2 reads. The Pages Function does not trust the client copy: it reads `XAI_VOICE_AGENT_ID` and `XAI_VOICE_CONNECT_METHOD` from the runtime env, which Q sets to the same values. The static page may show the agent id (it is not a secret). It must not show the API key.
+The Pages Function does not trust a client-supplied id. It reads `XAI_VOICE_AGENT_ID` at runtime and builds that same URL. `.dev.vars.example` sets `XAI_VOICE_AGENT_ID=agent_hL8eOtDRQ9nF50G5`. The static page may show the agent id. It must not show the API key.
 
 `CallButton.astro` reads `PHONE_E164` once. If it is a non-empty string matching `^\+[1-9]\d{7,14}$`, render `<a href={"tel:" + PHONE_E164}>Call MoneyPenny</a>`. Otherwise render `<button type="button" disabled>Number coming soon</button>` and do not emit `tel:`.
 
@@ -249,7 +247,7 @@ export const VOICE_CONNECT_METHOD = "" as "" | "websocket" | "webrtc" | "embed";
 - `npm` is the package manager. Node 22.
 - `astro.config.mjs` sets `site` only as a placeholder comment; canonical URL is whatever Pages preview Q gets. Do not hardcode the Webflow domain as the deploy target.
 - `wrangler.toml`: `pages_build_output_dir = "dist"`, `compatibility_date = "2026-09-01"`. No secrets in the file.
-- `.dev.vars.example` lists empty `XAI_API_KEY`, `XAI_VOICE_AGENT_ID`, and `XAI_VOICE_CONNECT_METHOD`. Real values stay in the Pages dashboard and in local `.dev.vars` (gitignored). Do not commit a key.
+- `.dev.vars.example` lists empty `XAI_API_KEY` and `XAI_VOICE_AGENT_ID=agent_hL8eOtDRQ9nF50G5`. The real key stays in the Pages dashboard and in local `.dev.vars` (gitignored). Do not commit a key.
 - `.gitignore`: `node_modules`, `dist`, `.astro`, `.env`, `.dev.vars`, `artifacts`, `.wrangler`. Keep ignoring `.vercel` if the stub ignore remains, but do not add a Vercel project.
 
 ### Scripts
@@ -279,34 +277,63 @@ Checked against xAI’s public docs on 2026-09-26:
 - Ephemeral tokens: https://docs.x.ai/developers/model-capabilities/audio/ephemeral-tokens
 - REST `POST /v1/realtime/client_secrets`: https://docs.x.ai/developers/rest-api-reference/inference/voice
 
-What those pages actually specify:
+Console Deployment pull (read-only, 2026-09-26), agent **MoneyPenny (Chief of Staff of The Agency)**:
 
-- Browser clients authenticate a realtime session with a short-lived ephemeral token. The long-lived API key is server-only.
-- Mint: `POST https://api.x.ai/v1/realtime/client_secrets` with `Authorization: Bearer $XAI_API_KEY` and JSON `{ "expires_after": { "seconds": 300 } }`.
+- Agent id: `agent_hL8eOtDRQ9nF50G5`. Status Draft. The console snippet connects while the agent is still Draft. Do not publish the agent from this repo.
+- There is no web embed widget.
+- Server-side sample connects with a Bearer key:
+
+  `wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5`
+
+  plus `Authorization: Bearer $XAI_API_KEY`. That header form is for a server process. The browser must not use it.
+
+What the public docs specify for a browser:
+
+- Mint: `POST https://api.x.ai/v1/realtime/client_secrets` with `Authorization: Bearer $XAI_API_KEY` and JSON `{ "expires_after": { "seconds": 300 } }`. The ephemeral-token page says this body does not accept `session` or `expires_after.anchor`. Do not send `agent_id` in the mint body. `agent_id` is a query parameter on the WebSocket URL, which is how the console selects the saved agent.
 - Success body: `{ "value": "<ephemeral token>", "expires_at": <unix seconds> }`.
-- Browsers cannot set an `Authorization` header on `WebSocket`. The documented browser connect is `new WebSocket("wss://api.x.ai/v1/realtime", ["xai-client-secret." + token])`. A model query (`?model=grok-voice-latest`) is also documented for direct sessions.
-- The REST reference allows an optional `session` object (`model`, `reasoning.effort`) on the mint call. The ephemeral-token guide says that call does not accept `session`. Phase 2 sends only `expires_after` unless Q’s deployment note says to bind `session`.
-- `agent_id` appears on xAI phone-number routing. It is not a field on `client_secrets`. Public docs do not publish a console embed snippet or a browser WebRTC signaling URL for a saved Voice Agent.
-- xAI also ships sample apps named Web Agent (WebSocket) and WebRTC Agent. Do not copy those repos. Use the public API.
+- Browser connect, because a browser cannot set WebSocket headers:
 
-Q will pass the agent id and the Deployment method (`websocket`, `webrtc`, or `embed`) before implementation wires audio. Those stay named values. Do not guess a WebRTC or embed payload.
+  `new WebSocket(url, ["xai-client-secret." + token])`
+
+  `url` is `wss://api.x.ai/v1/realtime?agent_id=` plus the env agent id.
+- After the socket opens, `session.update` may set `audio.input.format` and `audio.output.format`. Docs default is `audio/pcm` at `24000`. Do not send `instructions`, `voice`, `tools`, or `turn_detection`. Those stay on the saved agent.
+- With the default JSON audio transport, mic audio is `input_audio_buffer.append` (base64 PCM16) and playback is `response.output_audio.delta` (base64 PCM16), played as each delta arrives. Do not send the console sample’s `conversation.item.create` “Hello!” or a manual `response.create`. The saved agent’s turn detection commits the mic audio.
+- Do not copy the console TypeScript or Python samples into the repo. They use the `ws` package and a server API key.
 
 ### Component
 
 `MoneyPennyVoice.astro` plus `src/scripts/moneypenny-voice.ts`. One instance, in the hero. The script talks only to `VoiceAdapter` in `src/lib/voice-adapter.ts`:
 
 ```ts
-export type VoiceConnectMethod = "websocket" | "webrtc" | "embed";
+export interface VoiceSession {
+  token: string;
+  expiresAt: number;
+  url: string;
+}
 
 export interface VoiceAdapter {
-  connect(session: { token: string; expiresAt: number; agentId: string; method: VoiceConnectMethod }): Promise<void>;
+  connect(session: VoiceSession): Promise<void>;
   hangUp(): void;
 }
 ```
 
-`createAdapter(method)` returns the transport. `websocket` is the documented path and is the one phase 2 implements in full. `webrtc` and `embed` are stub transports that reject with a clear error until Q’s deployment note fills them. Swapping method does not change the markup or the states.
+Phase 2 ships one adapter, `websocket`. The interface stays so a later transport can replace `connect` without changing the Astro markup or the states.
 
-Do not put instructions, tools, or a persona in the page. The console Voice Agent is the persona. The site must not promise done-for-you work or an installed AI team through a `session.update`.
+On socket `open`, send exactly one `session.update`:
+
+```json
+{
+  "type": "session.update",
+  "session": {
+    "audio": {
+      "input": { "format": { "type": "audio/pcm", "rate": 24000 } },
+      "output": { "format": { "type": "audio/pcm", "rate": 24000 } }
+    }
+  }
+}
+```
+
+Capture mic audio at 24000 Hz, mono, PCM16 little-endian, and append it with `input_audio_buffer.append`. Play `response.output_audio.delta` immediately. Ignore `response.output_audio_transcript.delta`. Do not render a transcript. Do not put a persona, instructions, or tools in the page.
 
 ### States
 
@@ -326,9 +353,7 @@ Fallback copy, exact:
 - Mic blocked (`NotAllowedError` / `NotFoundError`) or no `navigator.mediaDevices`: `The microphone is blocked. Allow the microphone for this site, then try again.`
 - No `WebSocket` in the browser: `This browser can't start a voice call. Use a current version of Chrome, Safari, or Firefox.`
 
-Click flow for `websocket`: set `connecting`, then in parallel request the mic and `POST /api/voice-token` with an empty JSON body. On token success, `adapter.connect`. On socket open, set `live`. End call closes the socket, stops mic tracks, and returns to `idle`. A second click while `connecting` or `live` does nothing. Token or socket failure sets `error` with the browser message above only when the mic or WebSocket is the problem; otherwise `MoneyPenny didn't connect. Try again in a moment.`
-
-When method is `websocket`, the transport follows the public audio notes: 24 kHz PCM16 in and out, `server_vad`, and play `response.output_audio.delta` as each chunk arrives. Do not buffer a full reply before playback.
+Click flow: set `connecting`, then in parallel request the mic and `POST /api/voice-token` with an empty JSON body. On `{ ok: true }`, `adapter.connect({ token, expiresAt, url })`. After the socket opens and the audio `session.update` is sent, set `live`. End call closes the socket, stops mic tracks, and returns to `idle`. A second click while `connecting` or `live` does nothing. A `429` shows `MoneyPenny is busy. Wait a minute, then try again.` Other token or socket failures use the browser messages above when the mic or WebSocket is the problem; otherwise `MoneyPenny didn't connect. Try again in a moment.`
 
 ### Pages Function
 
@@ -345,10 +370,13 @@ Read only from the Pages `env` argument. If any value is missing or blank, respo
 | Name | Role |
 | --- | --- |
 | `XAI_API_KEY` | Bearer secret. Server only. Never written to the response, logs, or `dist/`. |
-| `XAI_VOICE_AGENT_ID` | Console agent id Q supplies. Returned to the browser as `agentId`. Not sent to `client_secrets` unless Q’s deployment note adds a documented field for it. |
-| `XAI_VOICE_CONNECT_METHOD` | `websocket`, `webrtc`, or `embed`. |
+| `XAI_VOICE_AGENT_ID` | Must be `agent_hL8eOtDRQ9nF50G5` for this deployment. Used only to build the WebSocket URL. Not sent in the mint body. |
 
-### xAI call (`websocket`)
+### Rate limit
+
+Before the xAI call, allow **5 mints per IP per 60 seconds**. IP is the `CF-Connecting-IP` header, otherwise the first hop of `X-Forwarded-For`, otherwise one shared `unknown` bucket. Keep timestamps in a module-level `Map` inside the isolate. On the 6th request in the window, respond `429` `{ "ok": false, "error": "rate_limited" }` and do not call xAI. Count the attempt when the mint is about to start, including attempts that later fail at xAI. Inject the map and the clock into `handleVoiceToken` so tests do not sleep and do not share state. This cap is per isolate. It is there to stop a preview tab from looping the mint endpoint. It is not a global Cloudflare rate-limit product.
+
+### xAI call
 
 ```
 POST https://api.x.ai/v1/realtime/client_secrets
@@ -358,21 +386,24 @@ Content-Type: application/json
 { "expires_after": { "seconds": 300 } }
 ```
 
-Timeout 10 seconds. One call.
+Timeout 10 seconds. One call. No `session` field.
 
 - xAI 200 with a non-empty string `value` and a number `expires_at`: respond `200`
 
   ```json
-  { "ok": true, "token": "<value>", "expiresAt": 1750000000, "agentId": "<XAI_VOICE_AGENT_ID>", "method": "websocket" }
+  {
+    "ok": true,
+    "token": "<value>",
+    "expiresAt": 1750000000,
+    "url": "wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5"
+  }
   ```
 
-  `token` is the ephemeral `value` only. Do not return the API key. Do not echo xAI’s raw body if it contains anything else.
+  `token` is the ephemeral `value` only. `url` is built from `XAI_VOICE_AGENT_ID` with `encodeURIComponent`. Do not return the API key. Do not echo xAI’s raw body if it contains anything else.
 
 - xAI non-200, network error, or timeout: `502` `{ "ok": false, "error": "token_failed" }`. Do not forward xAI’s body.
 
-- Method `webrtc` or `embed`: do not invent a mint payload. Respond `501` `{ "ok": false, "error": "method_pending" }` until Q’s deployment note names the request. The function signature stays the same so the adapter can start using a token later without a new route.
-
-`functions/api/voice-token.ts` is a thin `onRequestPost` (and `onRequest` that rejects non-POST) calling `handleVoiceToken({ request, env, fetch })`. Tests import `handleVoiceToken` and pass a mock `fetch`. The gate does not call xAI and does not need a live key.
+`functions/api/voice-token.ts` is a thin `onRequestPost` (and `onRequest` that rejects non-POST) calling `handleVoiceToken({ request, env, fetch, now, hits })`. Tests import `handleVoiceToken` and pass a mock `fetch`. The gate does not call xAI and does not need a live key.
 
 Optional manual check, not a gate: `npx wrangler pages dev dist` with `.dev.vars` present. The mock remains the automated gate.
 
@@ -451,10 +482,10 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
 
    Vitest, `tests/voice-token.test.ts`, mock `fetch`. Required cases:
 
-   - Env method `websocket`, agent id `agent_test`, key `test-key` → one POST to `https://api.x.ai/v1/realtime/client_secrets`, bearer `test-key`, JSON body `{ "expires_after": { "seconds": 300 } }`. Mock xAI `{ "value": "ephemeral-test-token", "expires_at": 1750000000 }` → response `200` `{ "ok": true, "token": "ephemeral-test-token", "expiresAt": 1750000000, "agentId": "agent_test", "method": "websocket" }`. `fetch` called once. Response body does not contain `test-key`.
-   - Missing `XAI_API_KEY`, missing agent id, or missing method → `500` `{ "ok": false, "error": "config" }`, fetch not called.
+   - Env agent id `agent_hL8eOtDRQ9nF50G5`, key `test-key` → one POST to `https://api.x.ai/v1/realtime/client_secrets`, bearer `test-key`, JSON body exactly `{ "expires_after": { "seconds": 300 } }` (no `session`, no `agent_id`). Mock xAI `{ "value": "ephemeral-test-token", "expires_at": 1750000000 }` → response `200` with `token` `ephemeral-test-token`, `expiresAt` `1750000000`, and `url` `wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5`. `fetch` called once. Response body does not contain `test-key`.
+   - Missing `XAI_API_KEY` or missing agent id → `500` `{ "ok": false, "error": "config" }`, fetch not called.
    - Mocked xAI `401` → `502` `{ "ok": false, "error": "token_failed" }`, fetch once, response does not contain the key or the xAI error body.
-   - Method `webrtc` or `embed` → `501` `{ "ok": false, "error": "method_pending" }`, fetch not called.
+   - Same IP, six calls inside one minute (injected clock) → the sixth returns `429` `{ "ok": false, "error": "rate_limited" }` and `fetch` was called five times.
    - `GET` → `405`.
 
 4. **Playwright screenshots and voice states**
@@ -491,5 +522,5 @@ Q deploys the `mindly-astro` branch to a Cloudflare Pages **preview** URL. Produ
 
 1. Scaffold Astro, tokens, layout, config, and the string-check script.
 2. Build sections in the order in the table, with live copy pasted from this plan.
-3. Wire `MoneyPennyVoice`, the websocket adapter, and `handleVoiceToken` with tests. Leave `webrtc` and `embed` as the pending branches above until Q names the deployment method.
+3. Wire `MoneyPennyVoice`, the websocket adapter, and `handleVoiceToken` (including the per-IP mint cap) with tests.
 4. Pass `npm run gate`, then Playwright, then commit on `mindly-astro` and update the draft PR. Do not merge.
