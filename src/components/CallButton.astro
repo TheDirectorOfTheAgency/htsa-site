@@ -1,0 +1,12 @@
+---
+import { PHONE_E164 } from "../config";
+
+const isValid =
+  PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
+---
+
+{isValid ? (
+  <a class="btn-call" href={`tel:${PHONE_E164}`}>Call MoneyPenny</a>
+) : (
+  <button class="btn-call" type="button" disabled>Number coming soon</button>
+)}

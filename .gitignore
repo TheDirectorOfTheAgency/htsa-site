@@ -1,1 +1,8 @@
 .vercel
+node_modules
+dist
+.astro
+.env
+.dev.vars
+artifacts
+.wrangler

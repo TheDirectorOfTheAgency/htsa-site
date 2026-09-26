@@ -1,0 +1,80 @@
+---
+import { PROOF } from "../config";
+---
+
+<section id="proof" class="proof section">
+  <div class="container">
+    <div class="proof__grid">
+      {PROOF.map((item) => (
+        <div class="proof__item">
+          <p class="proof__figure">{item.figure}</p>
+          <p class="proof__label">{item.label}</p>
+        </div>
+      ))}
+    </div>
+    <p class="proof__line">
+      THE MOUNTING MAN — OPERATOR PROOF. Twin Cities TV mounting: Frame / mantel / porcelain / in-wall cable. Business results, not student results.
+    </p>
+  </div>
+</section>
+
+<style>
+  .proof {
+    background: var(--white);
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .proof__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .proof__item {
+    text-align: center;
+    padding: var(--space-4);
+  }
+
+  .proof__item:not(:last-child) {
+    border-right: 1px solid var(--line-dark);
+  }
+
+  .proof__figure {
+    font-size: var(--font-proof);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+
+  .proof__label {
+    font-size: var(--font-small);
+    color: var(--muted);
+  }
+
+  .proof__line {
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    max-width: 60ch;
+    margin-inline: auto;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 767px) {
+    .proof__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .proof__item:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid var(--line-dark);
+    }
+  }
+</style>

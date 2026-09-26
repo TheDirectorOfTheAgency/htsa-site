@@ -1,0 +1,73 @@
+---
+const faqs = [
+  {
+    q: "Is this done for you?",
+    a: "This is not a done-for-you marketing service or an installed AI operations team.",
+  },
+  {
+    q: "Does the foyer include coaching?",
+    a: "Joining the Skool foyer does not purchase six-week coaching. Six-week coaching is a separate next step.",
+  },
+  {
+    q: "What does coaching cost?",
+    a: "Six-week coaching is $2,000–$5,000. No single public price.",
+  },
+  {
+    q: "Whose results are the dollar figures?",
+    a: "The Mounting Man's results are operator proof, not a promise of your results.",
+  },
+];
+---
+
+<section class="faq section">
+  <div class="container faq__inner">
+    <h2 class="section-title">Questions</h2>
+    <div class="faq__list">
+      {faqs.map((item) => (
+        <details class="faq__item">
+          <summary class="faq__question">{item.q}</summary>
+          <p class="faq__answer">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .faq__inner {
+    max-width: 720px;
+  }
+
+  .faq__list {
+    margin-top: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .faq__item {
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+  }
+
+  .faq__question {
+    font-weight: 650;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__answer {
+    margin-top: var(--space-4);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>

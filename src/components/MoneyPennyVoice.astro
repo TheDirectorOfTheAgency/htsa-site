@@ -1,0 +1,129 @@
+---
+---
+
+<div id="moneypenny" class="voice-card" data-state="idle">
+  <div class="voice-card__panel" data-panel="idle">
+    <p class="voice-card__title">Talk to MoneyPenny</p>
+    <p class="voice-card__hint">A live voice conversation. Coaching stays in the Skool foyer.</p>
+    <button class="btn-mic" type="button" aria-label="Start voice call with MoneyPenny">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M5 11a7 7 0 0014 0M12 18v3M8 21h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="voice-card__panel" data-panel="connecting">
+    <p class="voice-card__status">Connecting to MoneyPenny…</p>
+    <button class="btn-mic" type="button" disabled aria-label="Connecting">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M5 11a7 7 0 0014 0M12 18v3M8 21h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="voice-card__panel" data-panel="live">
+    <p class="voice-card__status">MoneyPenny is live.</p>
+    <button class="btn-end" type="button">End call</button>
+  </div>
+
+  <div class="voice-card__panel" data-panel="error">
+    <p class="voice-card__error" data-error-text></p>
+    <button class="btn-retry" type="button">Try again</button>
+  </div>
+</div>
+
+<script>
+  import { initMoneyPennyVoice } from "../scripts/moneypenny-voice";
+  initMoneyPennyVoice(document.getElementById("moneypenny")!);
+</script>
+
+<style>
+  .voice-card {
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+    padding: var(--space-5);
+    border-radius: var(--radius-ask);
+    background: var(--glass);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+  }
+
+  .voice-card__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .voice-card__title {
+    font-size: var(--font-card);
+    font-weight: 650;
+    color: var(--white);
+  }
+
+  .voice-card__hint,
+  .voice-card__status {
+    font-size: var(--font-small);
+    color: var(--muted-on-dark);
+  }
+
+  .voice-card__error {
+    font-size: var(--font-small);
+    color: var(--danger);
+    max-width: 36ch;
+  }
+
+  .btn-mic,
+  .btn-end,
+  .btn-retry {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-button);
+    font-weight: 650;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-mic {
+    background: var(--yellow);
+    color: var(--yellow-ink);
+  }
+
+  .btn-mic:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-end {
+    background: var(--white);
+    color: var(--ink);
+  }
+
+  .btn-retry {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--line);
+  }
+
+  .voice-card[data-state="idle"] [data-panel="idle"],
+  .voice-card[data-state="connecting"] [data-panel="connecting"],
+  .voice-card[data-state="live"] [data-panel="live"],
+  .voice-card[data-state="error"] [data-panel="error"] {
+    display: flex;
+  }
+
+  .voice-card[data-state="idle"] [data-panel]:not([data-panel="idle"]),
+  .voice-card[data-state="connecting"] [data-panel]:not([data-panel="connecting"]),
+  .voice-card[data-state="live"] [data-panel]:not([data-panel="live"]),
+  .voice-card[data-state="error"] [data-panel]:not([data-panel="error"]) {
+    display: none;
+  }
+</style>
