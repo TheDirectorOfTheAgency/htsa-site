@@ -35,11 +35,14 @@ describe("demo sales instructions", () => {
     const text = `${DEMO_SALES_INSTRUCTIONS}\n${demoInstructions(true)}`;
     expect(text).toContain("call with Marshall");
     expect(text).toContain("$6,458.10");
-    expect(text).toContain("$59,632.98");
+    expect(text).toContain("best month $59,798.23");
     expect(text).toContain("$512,022.13");
     expect(text).toContain("never done-for-you");
     expect(text).toContain("North Loop TV Mounting");
-    expect(text).toContain("$59,798.23");
+    expect(text).toContain("$59,632.98, $5,175");
+    expect(text).not.toContain("$59,798.23, $5,175");
+    expect(MONEYPENNY_CONSOLE_PROMPT).toContain("best month was $59,798.23");
+    expect(MONEYPENNY_CONSOLE_PROMPT).not.toContain("$59,632");
     expect(text).toContain("$5,175");
     expect(text).toContain("5,000+ TVs");
     expect(text).toContain("650+ reviews");

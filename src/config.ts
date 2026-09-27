@@ -13,7 +13,7 @@ export const BOOKING_CTA = "Book a call with Marshall";
 
 export const PROOF = [
   { figure: "$6,458.10", label: "Best day, 2025-09-23" },
-  { figure: "$59,632.98", label: "Best month, 2024-12" },
+  { figure: "$59,798.23", label: "Best month, 2024-12" },
   { figure: "$512,022.13", label: "Best year, 2024" },
 ] as const;
 

@@ -24,7 +24,7 @@ const required = [
   "Conversion &amp; Sales Systems",
   "Profit Math: Tying It Together",
   "$6,458.10",
-  "$59,632.98",
+  "$59,798.23",
   "$512,022.13",
   "Talk to MoneyPenny",
   "MoneyPenny, Marshall Wayne's AI right hand: blonde, dark round glasses, confident and direct.",
@@ -40,7 +40,7 @@ const forbidden = [
   "$497",
   "$1,497",
   "$25,000",
-  "$59,798",
+  "$59,632",
   "Module 0",
   'type="email"',
   "AGENTMAIL",
@@ -62,14 +62,14 @@ for (const text of forbidden) {
   }
 }
 
-const allowedFigures = new Set(["$6,458.10", "$59,632.98", "$512,022.13"]);
+const allowedFigures = new Set(["$6,458.10", "$59,798.23", "$512,022.13"]);
 for (const amount of distHtml.match(/\$\d[\d,]*(?:\.\d+)?/g) ?? []) {
   if (!allowedFigures.has(amount)) {
     console.error(`Unapproved figure on the home page: ${amount}`);
     process.exit(1);
   }
 }
-for (const retired of ["5,000+ TVs", "650+ reviews", "$17,291"]) {
+for (const retired of ["5,000+ TVs", "650+ reviews", "$17,291", "$59,632.98"]) {
   if (distHtml.includes(retired)) {
     console.error(`Retired claim on the home page: ${retired}`);
     process.exit(1);
@@ -128,7 +128,7 @@ if (!demoHtml.includes("North Loop TV Mounting")) {
   console.error("Demo page is missing the test placeholder");
   process.exit(1);
 }
-for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,798", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000"]) {
+for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,632", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000"]) {
   if (demoHtml.includes(text)) {
     console.error(`Demo page contains unapproved price: ${text}`);
     process.exit(1);
