@@ -1,30 +1,25 @@
-import { handleVoiceToken } from "../lib/handle-voice-token";
-
-const hits = new Map<string, number[]>();
+import { handleMapPack } from "../../lib/map-pack";
+import { demoHits } from "../../lib/demo-http";
 
 interface Env {
-  XAI_API_KEY: string;
-  XAI_VOICE_AGENT_ID: string;
-  XAI_DEMO_AGENT_ID?: string;
+  GOOGLE_MAPS_API_KEY?: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  return handleVoiceToken({
+  return handleMapPack({
     request: context.request,
     env: context.env,
     fetch: globalThis.fetch.bind(globalThis),
-    hits,
+    hits: demoHits,
   });
 };
 
 export const onRequest: PagesFunction<Env> = async (context) => {
-  if (context.request.method === "POST") {
-    return onRequestPost(context);
-  }
-  return handleVoiceToken({
+  if (context.request.method === "POST") return onRequestPost(context);
+  return handleMapPack({
     request: context.request,
     env: context.env,
     fetch: globalThis.fetch.bind(globalThis),
-    hits,
+    hits: demoHits,
   });
 };

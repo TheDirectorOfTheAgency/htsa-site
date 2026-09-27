@@ -28,6 +28,9 @@ test("voice idle state", async ({ page }) => {
 });
 
 test("voice connecting state", async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getUserMedia = () => new Promise(() => {});
+  });
   await page.route("**/api/voice-token", async (route) => {
     await new Promise(() => {});
   });

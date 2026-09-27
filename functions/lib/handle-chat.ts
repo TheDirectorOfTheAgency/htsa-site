@@ -7,7 +7,7 @@ export interface ChatEnv {
 }
 
 const CHAT_URL = "https://api.x.ai/v1/chat/completions";
-const DEFAULT_MODEL = "grok-4.20-0309-non-reasoning";
+export const DEFAULT_CHAT_MODEL = "grok-4.20-0309-non-reasoning";
 // Website critiques get a model that thinks before it writes.
 const CRITIQUE_MODEL = "grok-4.20-0309-reasoning";
 const WINDOW_MS = 60_000;
@@ -110,7 +110,7 @@ export async function handleChat(opts: {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: url ? CRITIQUE_MODEL : env.XAI_CHAT_MODEL?.trim() || DEFAULT_MODEL,
+      model: url ? CRITIQUE_MODEL : env.XAI_CHAT_MODEL?.trim() || DEFAULT_CHAT_MODEL,
       messages: [...system, ...msgs],
       stream: true,
       max_tokens: url ? 2500 : 900,

@@ -1,0 +1,163 @@
+---
+import Base from "../../layouts/Base.astro";
+import { DEMO_GREETING, DEMO_SOFT_CLOSE, DEMO_TEST_BUSINESS } from "../../lib/demo-session";
+---
+
+<Base
+  title="MoneyPenny voice demo | HTSA"
+  description="A live voice demo. MoneyPenny asks what business you are in, then shows the site, map pack, and AI citation checks."
+  robots="noindex, nofollow"
+>
+  <script is:inline>
+    if (new URLSearchParams(location.search).get("test") === "1") {
+      document.documentElement.dataset.demoTest = "1";
+    }
+  </script>
+  <main class="demo">
+    <p class="eyebrow">HTSA voice demo</p>
+    <h1>Talk to MoneyPenny.</h1>
+    <p class="demo__lead">
+      Tap once. She opens with “{DEMO_GREETING}” She checks the site, the map pack, and who the AI answer engines name, then invites you to join the Skool.
+    </p>
+
+    <aside class="test-banner">
+      <p><strong>Test mode.</strong> {DEMO_TEST_BUSINESS.label}</p>
+      <dl>
+        <div><dt>Business</dt><dd>{DEMO_TEST_BUSINESS.business}</dd></div>
+        <div><dt>City</dt><dd>{DEMO_TEST_BUSINESS.city}</dd></div>
+        <div><dt>Service</dt><dd>{DEMO_TEST_BUSINESS.service}</dd></div>
+        <div><dt>Website</dt><dd>{DEMO_TEST_BUSINESS.website}</dd></div>
+      </dl>
+    </aside>
+
+    <div id="demo-voice" class="demo-voice" data-state="idle">
+      <div data-panel="idle">
+        <button class="demo-go" type="button" data-start>Talk to MoneyPenny</button>
+        <p class="demo__hint">Works in Safari on iPhone, Vision Pro, and desktop. Allow the microphone when asked.</p>
+      </div>
+      <div data-panel="connecting">
+        <p class="demo__status">Connecting to MoneyPenny…</p>
+        <button class="demo-end" type="button" data-end>Cancel</button>
+      </div>
+      <div data-panel="live">
+        <p class="demo__status">MoneyPenny is live.</p>
+        <button class="demo-end" type="button" data-end>End call</button>
+      </div>
+      <div data-panel="error">
+        <p class="demo__error" data-error-text></p>
+        <button class="demo-end" type="button" data-retry>Try again</button>
+      </div>
+    </div>
+
+    <section class="cards" aria-live="polite">
+      <article class="card" data-card="site">
+        <h2>Site</h2>
+        <p class="card__status" data-status>Waiting until she has a website.</p>
+        <div data-body></div>
+      </article>
+      <article class="card" data-card="map">
+        <h2>Map pack</h2>
+        <p class="card__status" data-status>Waiting for the business and city.</p>
+        <div data-body></div>
+      </article>
+      <article class="card" data-card="competitors">
+        <h2>Competitor snapshot</h2>
+        <p class="card__status" data-status>Top 3 from the map pack.</p>
+        <div data-body></div>
+      </article>
+      <article class="card" data-card="citations">
+        <h2>AI citations</h2>
+        <p class="card__status" data-status>Waiting for the citation check.</p>
+        <div data-body></div>
+      </article>
+    </section>
+
+    <p class="demo__close">{DEMO_SOFT_CLOSE}</p>
+    <p class="demo__proof">Marshall's own TV-mounting business: best day $6,458.10, best month $59,798.23, best year $512,022.13. HTSA is coaching and a community, never done-for-you. The next step is the Skool foyer.</p>
+    <p class="demo__back"><a href="/">Back to the site</a></p>
+  </main>
+  <script>
+    import { initDemoVoice } from "../../scripts/demo-voice-sales";
+    const root = document.getElementById("demo-voice");
+    if (root) initDemoVoice(root);
+  </script>
+</Base>
+
+<style>
+  .demo {
+    min-height: 100vh;
+    background: var(--black);
+    color: var(--white);
+    width: min(1120px, calc(100% - 32px));
+    margin-inline: auto;
+    padding: max(28px, env(safe-area-inset-top)) 0 max(40px, env(safe-area-inset-bottom));
+  }
+  .demo .eyebrow { color: var(--yellow); margin-bottom: 12px; }
+  .demo h1 {
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    max-width: 14ch;
+    margin-bottom: 16px;
+  }
+  .demo__lead, .demo__hint, .demo__close, .demo__proof, .demo__back {
+    max-width: 42rem;
+    color: var(--muted-on-dark);
+    font-size: 1.05rem;
+  }
+  .demo__lead { margin-bottom: 28px; }
+  .test-banner { display: none; }
+  :global(html[data-demo-test="1"]) .test-banner {
+    display: block;
+    border: 1px solid var(--yellow);
+    border-radius: 16px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    max-width: 42rem;
+  }
+  .test-banner dl { display: grid; gap: 6px; margin-top: 10px; }
+  .test-banner div { display: flex; gap: 12px; }
+  .test-banner dt { min-width: 6.5rem; color: var(--yellow); font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .demo-voice { margin: 8px 0 28px; }
+  .demo-go, .demo-end {
+    min-height: 96px;
+    min-width: min(100%, 280px);
+    padding: 18px 28px;
+    border-radius: var(--radius-pill);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    touch-action: manipulation;
+  }
+  .demo-go { background: var(--yellow); color: var(--yellow-ink); width: min(100%, 520px); }
+  .demo-end { background: var(--white); color: var(--ink); }
+  .demo-go:focus-visible, .demo-end:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+  .demo__status, .demo__error { font-size: 1.15rem; margin-bottom: 12px; }
+  .demo__error { color: #ffb4b4; }
+  .demo__hint { margin-top: 12px; }
+  .cards {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  .card {
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 20px;
+    padding: 18px 18px 8px;
+  }
+  .card h2 { font-size: 1.35rem; letter-spacing: -0.03em; margin-bottom: 6px; }
+  .card__status { color: var(--muted); margin-bottom: 10px; }
+  :global(.fact) { display: grid; grid-template-columns: minmax(7rem, 34%) 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.08); font-size: 0.98rem; }
+  :global(.fact__label) { color: var(--muted); }
+  .demo__close { margin-top: 28px; color: var(--white); font-size: 1.2rem; }
+  .demo__proof, .demo__back { margin-top: 12px; }
+  .demo__back a { color: var(--yellow); text-decoration: underline; }
+  .demo-voice[data-state="idle"] [data-panel]:not([data-panel="idle"]),
+  .demo-voice[data-state="connecting"] [data-panel]:not([data-panel="connecting"]),
+  .demo-voice[data-state="live"] [data-panel]:not([data-panel="live"]),
+  .demo-voice[data-state="error"] [data-panel]:not([data-panel="error"]) { display: none; }
+  @media (min-width: 800px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -4,7 +4,7 @@ Phase 1 is this document only. Phase 2 implements it. Do not merge the PR. Do no
 
 The layout pattern comes from the Mindly AI preview (https://oma-mindly.framer.website/) and the brand-reference shots named below. Rebuild the pattern in our own markup, CSS, and words. Do not copy Omakase images, copy, font files, SVG assets, or code.
 
-Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `main` (`index.html`) is not the offer. Its prices (`$497`, `$1,497`, `$25,000`) and its `$59,798` month figure must not appear.
+Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `main` (`index.html`) is not the offer. Its prices (`$497`, `$1,497`, `$25,000`) must not appear. The incorrect best-month figure `$59,632.98` must not appear. The verified December 2024 total collected is `$59,798.23`.
 
 ## Locked decisions (do not reopen)
 
@@ -14,7 +14,7 @@ Offer source of truth is the live site, fetched 2026-09-26. The dead stub on `ma
 - Hero image and hero video are labeled neutral placeholders. No stock photos, no face photos, no copied template media.
 - `PHONE_E164` stays `null` until Q sets it. While null, all three call controls render the visible text **Number coming soon**, disabled, with no `tel:` href.
 - Primary CTA text is exactly `ENTER THE SKOOL FOYER`. Every CTA uses exactly `https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311`.
-- Proof figures are exactly `$6,458.10`, `$59,632.98`, and `$512,022.13`.
+- Proof figures are exactly `$6,458.10`, `$59,798.23`, and `$512,022.13`.
 - The packages block uses the WHOOP three-card **layout** and the live site’s **one door**. It does not invent a second or third price. The only public price range is six-week coaching `$2,000–$5,000`, with the live sentence that there is no single public price.
 - The hero chat box is a live voice session with MoneyPenny, the xAI Voice Agent `agent_hL8eOtDRQ9nF50G5` (Draft; the console deployment works while Draft). Transport is the realtime WebSocket, not an embed. The browser never receives `XAI_API_KEY`.
 - No decision is left for Mr. Wayne. The third “tier” card is a boundary card, not a product, because the live site has one door.
@@ -67,12 +67,12 @@ Card faces are light (WHOOP’s ONE / PEAK / LIFE cards sit on black). Do not na
 | Figure | Label |
 | --- | --- |
 | `$6,458.10` | Best day, 2025-09-23 |
-| `$59,632.98` | Best month, 2024-12 |
+| `$59,798.23` | Best month, 2024-12 |
 | `$512,022.13` | Best year, 2024 |
 
 Under the figures, verbatim: `THE MOUNTING MAN — OPERATOR PROOF. Twin Cities TV mounting: Frame / mantel / porcelain / in-wall cable. Business results, not student results.`
 
-Also keep, in the story section, the live week figure only as prose already on the live site: best week 2024-12-01–07, `$17,291.59`. It is not a fourth proof-strip stat. The stub’s `$59,798`, `$500K+`, `0 employees`, and `6X` must not be rendered.
+Also keep, in the story section, the live week figure only as prose already on the live site: best week 2024-12-01–07, `$17,291.59`. It is not a fourth proof-strip stat. The incorrect month figure `$59,632.98`, plus `$500K+`, `0 employees`, and `6X`, must not be rendered.
 
 ### FAQ (answers are existing sentences)
 
@@ -226,7 +226,7 @@ export const SKOOL_CTA = "ENTER THE SKOOL FOYER";
 
 export const PROOF = [
   { figure: "$6,458.10", label: "Best day, 2025-09-23" },
-  { figure: "$59,632.98", label: "Best month, 2024-12" },
+  { figure: "$59,798.23", label: "Best month, 2024-12" },
   { figure: "$512,022.13", label: "Best year, 2024" },
 ] as const;
 
@@ -447,7 +447,7 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    - `https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311`
    - `ENTER THE SKOOL FOYER`
    - `$6,458.10`
-   - `$59,632.98`
+   - `$59,798.23`
    - `$512,022.13`
    - `Number coming soon`
    - `Hero image slot`
@@ -464,7 +464,7 @@ Phase 2 is done when every command below exits 0 on a clean checkout. Run them i
    - `$497`
    - `$1,497`
    - `$25,000`
-   - `$59,798`
+   - `$59,632.98`
    - `tel:`
    - `type="email"`
    - `AGENTMAIL`

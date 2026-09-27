@@ -2,7 +2,6 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "tests",
-  testMatch: "visual.spec.ts",
   fullyParallel: false,
   retries: 0,
   reporter: "list",
@@ -19,7 +18,13 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
+      testMatch: "visual.spec.ts",
       use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "webkit",
+      testMatch: "webkit-voice.spec.ts",
+      use: { ...devices["Desktop Safari"] },
     },
   ],
 });
