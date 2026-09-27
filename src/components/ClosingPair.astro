@@ -1,5 +1,8 @@
 ---
 import CallButton from "./CallButton.astro";
+import { PHONE_E164, SKOOL_URL, SKOOL_CTA } from "../config";
+
+const hasPhone = PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
 ---
 
 <section class="close section">
@@ -10,10 +13,17 @@ import CallButton from "./CallButton.astro";
         <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </a>
-    <div class="close__card close__card--black">
-      <span class="close__label">Call now</span>
-      <CallButton />
-    </div>
+    {hasPhone ? (
+      <div class="close__card close__card--black">
+        <span class="close__label">Call now</span>
+        <CallButton />
+      </div>
+    ) : (
+      <div class="close__card close__card--black">
+        <span class="close__label">Start free in the Skool foyer</span>
+        <a class="btn-primary" href={SKOOL_URL}>{SKOOL_CTA}</a>
+      </div>
+    )}
   </div>
 </section>
 

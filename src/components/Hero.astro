@@ -8,18 +8,22 @@ import { SKOOL_URL, SKOOL_CTA } from "../config";
   <AssetSlot variant="image" />
   <div class="hero__inner container">
     <div class="hero__badge">
-      <span>Coaching + community foyer</span>
-      <span class="hero__badge-right">Skool foyer</span>
+      <span>Owner-operator</span>
+      <span class="hero__badge-right">No employees</span>
     </div>
 
     <h1 class="hero__title">
-      <span>You don't enroll in a course.</span>
-      <span>You join <em class="accent">the Agency.</em></span>
+      <span>A tiny Minneapolis TV mounting business.</span>
+      <span>A <em class="accent">$59,632.98 month.</em></span>
     </h1>
 
     <p class="hero__sub">
-      Six-week operator coaching for home service owners. Learn the marketing, positioning, and pricing systems used at The Mounting Man, then apply them in your own business. Coaching is $2,000–$5,000. Start in the Skool foyer.
+      Hello, my name is Marshall Wayne, owner of a small TV mounting business called The Mounting Man, based out of Minneapolis. With Google Ads, creative search engine optimization, and a relentless focus on high-ticket jobs, I've had a $6,458.10 day, a $17,291.59 week, and a $59,632.98 month. I have no employees. I do the jobs myself, and once in a while I bring along a helper or a service technician. In The Agency, I'll coach you to do the same in your trade.
     </p>
+
+    <AssetSlot variant="video" />
+
+    <p class="hero__handoff">Watch the video, then bring your questions to MoneyPenny. She runs things for Mr. Wayne.</p>
 
     <MoneyPennyVoice />
 
@@ -40,7 +44,6 @@ import { SKOOL_URL, SKOOL_CTA } from "../config";
       </div>
     </div>
 
-    <AssetSlot variant="video" />
   </div>
 </section>
 
@@ -49,7 +52,7 @@ import { SKOOL_URL, SKOOL_CTA } from "../config";
     position: relative;
     background: var(--black);
     color: var(--white);
-    padding-top: 112px;
+    padding-top: var(--space-8);
     padding-bottom: var(--space-9);
     overflow: hidden;
   }
@@ -99,7 +102,7 @@ import { SKOOL_URL, SKOOL_CTA } from "../config";
     font-weight: 700;
     line-height: 1.02;
     letter-spacing: -0.03em;
-    max-width: 18ch;
+    max-width: 22ch;
   }
 
   .hero__title em {
@@ -107,10 +110,16 @@ import { SKOOL_URL, SKOOL_CTA } from "../config";
   }
 
   .hero__sub {
-    max-width: 52ch;
+    max-width: 78ch;
     font-size: var(--font-body);
     color: var(--muted-on-dark);
     line-height: 1.6;
+  }
+
+  .hero__handoff {
+    font-size: var(--font-small);
+    color: var(--muted-on-dark);
+    margin-bottom: calc(var(--space-2) * -1);
   }
 
   .hero__cta-row {

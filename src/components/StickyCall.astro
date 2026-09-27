@@ -1,10 +1,16 @@
 ---
 import CallButton from "./CallButton.astro";
+import { PHONE_E164 } from "../config";
+
+// Only float the call pill once a real number exists; a disabled pill just covers content.
+const hasNumber = PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
 ---
 
-<div class="sticky-call">
-  <CallButton />
-</div>
+{hasNumber && (
+  <div class="sticky-call">
+    <CallButton />
+  </div>
+)}
 
 <style>
   .sticky-call {

@@ -17,3 +17,16 @@ export const VOICE_AGENT_ID = "agent_hL8eOtDRQ9nF50G5";
 
 export const VOICE_REALTIME_URL =
   "wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5";
+
+// Mr. Wayne's sales video (Vimeo "High Ticket Home Service Academy", 22 min). Empty string shows the placeholder slot.
+export const HERO_VIMEO_ID = "806355796";
+
+/** BrightLocal heat map screenshots. Drop PNGs in public/heatmaps/ and set src (e.g. "/heatmaps/tv-mounting.png"). Empty src shows a placeholder frame. */
+export const HEATMAPS: { keyword: string; caption: string; src: string }[] = [
+  { keyword: "TV mounting service Minneapolis", caption: "#1 at all 81 grid points", src: "/heatmaps/tv-mounting-minneapolis.webp" },
+  { keyword: "Corporate TV mounting", caption: "#1 at all 81 grid points", src: "/heatmaps/corporate-tv-mounting.webp" },
+  { keyword: "Samsung Frame installation", caption: "#1 at all 81 grid points", src: "/heatmaps/samsung-frame-installation.webp" },
+  { keyword: "Mantel mount installation", caption: "#1 at all 81 grid points", src: "/heatmaps/mantel-mount-installation.webp" },
+  { keyword: "TV mounting service", caption: "#1 across the core metro, 29 of 81 grid points", src: "/heatmaps/tv-mounting.webp" },
+  { keyword: "TV mounting service near me", caption: "#1 across the core metro. Orange spots are zip codes we don't chase.", src: "/heatmaps/tv-mounting-near-me.webp" },
+];

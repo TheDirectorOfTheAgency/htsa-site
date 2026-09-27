@@ -1,3 +1,6 @@
-name = "htsa-site"
+name = "htsa-preview"
 compatibility_date = "2026-09-01"
 pages_build_output_dir = "dist"
+
+[vars]
+XAI_VOICE_AGENT_ID = "agent_hL8eOtDRQ9nF50G5"

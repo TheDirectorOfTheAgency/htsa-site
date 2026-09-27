@@ -1,0 +1,12 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 1440, height: 1000 } });
+await p.goto("https://htsa-preview.pages.dev/");
+await p.fill("#mp-input", "Critique my site: themountingman.com");
+await p.keyboard.press("Enter");
+await p.waitForSelector(".sitecheck", { timeout: 20000 });
+await p.locator("#moneypenny-chat").screenshot({ path: "/workspace/htsa-deploy/crit-1.png" });
+await p.waitForSelector(".msg__copy", { timeout: 60000 });
+await p.evaluate(() => { const l = document.querySelector("[data-chat-log]"); l.style.maxHeight = "none"; });
+await p.locator("#moneypenny-chat").screenshot({ path: "/workspace/htsa-deploy/crit-2.png" });
+await b.close();

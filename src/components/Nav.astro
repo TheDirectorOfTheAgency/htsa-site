@@ -1,19 +1,21 @@
 ---
 import CallButton from "./CallButton.astro";
-import { SKOOL_URL, SKOOL_CTA } from "../config";
+import { SKOOL_URL, SKOOL_CTA, PHONE_E164 } from "../config";
+
+const hasPhone = PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
 
 const links = [
   { href: "#curriculum", label: "Curriculum" },
   { href: "#proof", label: "Proof" },
   { href: "#packages", label: "Packages" },
   { href: "#why-us", label: "Why us" },
-  { href: "#moneypenny", label: "Talk" },
+  { href: "#moneypenny-chat", label: "Ask" },
 ];
 ---
 
 <nav class="nav" aria-label="Primary">
   <div class="nav-pill">
-    <a class="nav-brand" href="#">HTSA</a>
+    <a class="nav-brand" href="#">The Agency</a>
 
     <details class="nav-menu">
       <summary class="nav-menu__toggle" aria-label="Menu">Menu</summary>
@@ -31,8 +33,8 @@ const links = [
     </div>
 
     <div class="nav-actions">
-      <CallButton />
-      <a class="btn-primary nav-cta" href={SKOOL_URL}>{SKOOL_CTA}</a>
+      {hasPhone && <CallButton />}
+      <a class="btn-primary nav-cta" href={SKOOL_URL}><span class="nav-cta__full">{SKOOL_CTA}</span><span class="nav-cta__short">SKOOL FOYER</span></a>
     </div>
   </div>
 </nav>
@@ -124,13 +126,64 @@ const links = [
     padding-top: var(--space-3);
   }
 
+  .nav-cta__short {
+    display: none;
+  }
+
   @media (max-width: 767px) {
+    .nav {
+      top: 12px;
+      left: 12px;
+      right: 12px;
+    }
+
+    .nav-pill {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 8px 8px 8px 16px;
+    }
+
     .nav-links--desktop {
       display: none;
     }
 
     .nav-menu {
       display: block;
+      position: relative;
+      margin-right: auto;
+    }
+
+    .nav-menu[open] .nav-links {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: -8px;
+      min-width: 180px;
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-3);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-actions {
+      flex-wrap: nowrap;
+    }
+
+    .nav-actions :global(.btn-call) {
+      display: none;
+    }
+
+    .nav-cta {
+      padding: 9px 14px;
+    }
+
+    .nav-cta__full {
+      display: none;
+    }
+
+    .nav-cta__short {
+      display: inline;
     }
   }
 
