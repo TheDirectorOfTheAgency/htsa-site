@@ -39,7 +39,14 @@ describe("demo sales instructions", () => {
     expect(text).toContain("$512,022.13");
     expect(text).toContain("never done-for-you");
     expect(text).toContain("North Loop TV Mounting");
-    for (const price of ["$97", "$497", "$1,997", "$1997", "$1,497", "$59,798", "$15,000"]) {
+    expect(text).toContain("$59,798.23");
+    expect(text).toContain("$5,175");
+    expect(text).toContain("5,000+ TVs");
+    expect(text).toContain("650+ reviews");
+    expect(text).toContain("Retired claims, never say these");
+    expect(text).not.toContain("$2,000");
+    expect(text).not.toContain("$17,291");
+    for (const price of ["$97", "$497", "$1,997", "$1997", "$1,497", "$15,000"]) {
       expect(text).not.toContain(price);
     }
   });

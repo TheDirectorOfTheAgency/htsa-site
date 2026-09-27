@@ -222,7 +222,12 @@ test("webkit demo page greets from the tap and keeps the test business on screen
   );
   expect(sent).toContain("server_vad");
   expect(sent).toContain("This is exactly what we fix inside HTSA - want me to tell you how Marshall can help?");
+  expect(sent).toContain("Retired claims, never say these");
+  expect(sent).toContain("$59,798.23");
+  expect(sent).toContain("5,000+ TVs");
+  expect(sent).toContain("650+ reviews");
   expect(sent).not.toContain("$497");
   expect(sent).not.toContain("$1,997");
+  expect(sent).not.toContain("$2,000");
   await expect(page.locator("#demo-voice")).toHaveAttribute("data-audio-unlocked", "1");
 });

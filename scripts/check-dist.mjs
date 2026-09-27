@@ -101,7 +101,7 @@ if (!demoHtml.includes("North Loop TV Mounting")) {
   console.error("Demo page is missing the test placeholder");
   process.exit(1);
 }
-for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,798"]) {
+for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,798", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000"]) {
   if (demoHtml.includes(text)) {
     console.error(`Demo page contains unapproved price: ${text}`);
     process.exit(1);
