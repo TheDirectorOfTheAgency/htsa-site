@@ -12,12 +12,6 @@ export const PROOF = [
   { figure: "$512,022.13", label: "Best year, 2024" },
 ] as const;
 
-/** Console Voice Agent. Not a secret. The API key is never a field here. */
-export const VOICE_AGENT_ID = "agent_hL8eOtDRQ9nF50G5";
-
-export const VOICE_REALTIME_URL =
-  "wss://api.x.ai/v1/realtime?agent_id=agent_hL8eOtDRQ9nF50G5";
-
 // Mr. Wayne's sales video (Vimeo "High Ticket Home Service Academy", 22 min). Empty string shows the placeholder slot.
 export const HERO_VIMEO_ID = "806355796";
 

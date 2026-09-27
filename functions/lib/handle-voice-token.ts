@@ -1,6 +1,7 @@
 export interface VoiceTokenEnv {
   XAI_API_KEY?: string;
   XAI_VOICE_AGENT_ID?: string;
+  XAI_DEMO_AGENT_ID?: string;
 }
 
 export interface HandleVoiceTokenOptions {
@@ -28,6 +29,17 @@ function clientIp(request: Request): string {
   const xff = request.headers.get("X-Forwarded-For");
   if (xff) return xff.split(",")[0].trim();
   return "unknown";
+}
+
+async function wantsDemo(request: Request): Promise<boolean> {
+  const text = await request.clone().text();
+  if (!text.trim()) return false;
+  try {
+    const body = JSON.parse(text) as { demo?: unknown };
+    return body?.demo === true;
+  } catch {
+    return false;
+  }
 }
 
 function isRateLimited(
@@ -60,7 +72,10 @@ export async function handleVoiceToken({
   }
 
   const apiKey = env.XAI_API_KEY?.trim();
-  const agentId = env.XAI_VOICE_AGENT_ID?.trim();
+  const demo = await wantsDemo(request);
+  const agentId = demo
+    ? env.XAI_DEMO_AGENT_ID?.trim() || env.XAI_VOICE_AGENT_ID?.trim()
+    : env.XAI_VOICE_AGENT_ID?.trim();
 
   if (!apiKey || !agentId) {
     return json(500, { ok: false, error: "config" });

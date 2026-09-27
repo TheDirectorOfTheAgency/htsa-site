@@ -17,6 +17,8 @@ const required = [
   "$17,291.59",
   "This is not a done-for-you marketing service or an installed AI operations team.",
   "Talk to MoneyPenny",
+  'rel="dns-prefetch" href="https://api.x.ai"',
+  'rel="preconnect" href="https://api.x.ai"',
 ];
 
 const forbidden = [
@@ -70,7 +72,7 @@ function walk(dir) {
     const path = join(dir, entry);
     if (statSync(path).isDirectory()) {
       walk(path);
-    } else {
+    } else if (/\.(html|js|css|svg|json|txt|mjs)$/.test(path)) {
       const content = readFileSync(path, "utf8");
       if (content.includes("XAI_API_KEY")) {
         console.error(`XAI_API_KEY found in ${path}`);
@@ -80,9 +82,30 @@ function walk(dir) {
         console.error(`Suspicious xAI key pattern in ${path}`);
         process.exit(1);
       }
+      if (content.includes("agent_hL8eOtDRQ9nF50G5")) {
+        console.error(`Voice agent id hardcoded in ${path}`);
+        process.exit(1);
+      }
     }
   }
 }
 
 walk("dist");
+
+const demoHtml = readFileSync("dist/demo/voice-sales/index.html", "utf8");
+if (!demoHtml.includes('name="robots" content="noindex, nofollow"')) {
+  console.error("Demo page is missing noindex");
+  process.exit(1);
+}
+if (!demoHtml.includes("North Loop TV Mounting")) {
+  console.error("Demo page is missing the test placeholder");
+  process.exit(1);
+}
+for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,798"]) {
+  if (demoHtml.includes(text)) {
+    console.error(`Demo page contains unapproved price: ${text}`);
+    process.exit(1);
+  }
+}
+
 console.log("check-dist: ok");
