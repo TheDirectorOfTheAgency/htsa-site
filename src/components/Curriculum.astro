@@ -1,5 +1,5 @@
 ---
-import { CURRICULUM } from "../data/curriculum";
+import { BEFORE_MODULES, CURRICULUM } from "../data/curriculum";
 ---
 
 <section id="curriculum" class="curriculum section">
@@ -9,6 +9,20 @@ import { CURRICULUM } from "../data/curriculum";
     <p class="curriculum__intro">
       Your hands already do the part AI can't. Everything inside is the other half of the moat: the business.
     </p>
+    <aside class="curriculum__before">
+      <p class="curriculum__before-label">Before the modules</p>
+      {BEFORE_MODULES.map((track) => (
+        <p class="curriculum__track">
+          <span class="curriculum__track-title">{track.title}</span>
+          <span class="curriculum__track-count">
+            {track.title === "Intro"
+              ? `${track.lessons.length} lessons, including AI vs. The Trades`
+              : `${track.lessons.length} lessons`}
+          </span>
+          <span class="curriculum__track-lessons">{track.lessons.join(" · ")}</span>
+        </p>
+      ))}
+    </aside>
     <div class="curriculum__grid">
       {CURRICULUM.map((mod) => (
         <article class="module-card">
@@ -40,8 +54,38 @@ import { CURRICULUM } from "../data/curriculum";
 
   .curriculum__intro {
     max-width: 38rem;
-    margin: var(--space-4) 0 var(--space-6);
+    margin: var(--space-4) 0 var(--space-5);
     font-size: 1.15rem;
+  }
+
+  .curriculum__before {
+    margin-bottom: var(--space-6);
+    max-width: 46rem;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .curriculum__before-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--font-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .curriculum__track {
+    display: grid;
+    gap: 4px;
+  }
+
+  .curriculum__track-title {
+    font-weight: 650;
+  }
+
+  .curriculum__track-count,
+  .curriculum__track-lessons {
+    color: var(--muted);
+    font-size: var(--font-small);
   }
 
   .curriculum__grid {
