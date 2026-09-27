@@ -24,12 +24,13 @@ const MAX_PAGES = 516;
       >
         {POINTS.map((point) => (
           <div class="index-proof__col">
-            <p class="index-proof__value">{point.value}</p>
             <div class="index-proof__meter">
               <div
                 class="index-proof__bar"
                 style={`height: ${((point.pages / MAX_PAGES) * 100).toFixed(3)}%`}
-              />
+              >
+                <span class="index-proof__value">{point.value}</span>
+              </div>
             </div>
             <p class="index-proof__label">{point.label}</p>
           </div>
@@ -91,28 +92,36 @@ const MAX_PAGES = 516;
     min-width: 0;
   }
 
+  .index-proof__meter {
+    width: min(112px, 100%);
+    height: 320px;
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding-top: 4rem;
+    border-bottom: 2px solid var(--yellow);
+  }
+
+  .index-proof__bar {
+    position: relative;
+    width: 100%;
+    background: var(--yellow);
+    border-radius: 10px 10px 0 0;
+    min-height: 8px;
+  }
+
   .index-proof__value {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
     font-size: var(--font-proof);
     font-weight: 650;
     letter-spacing: -0.03em;
     font-variant-numeric: tabular-nums;
     color: var(--yellow);
     line-height: 1;
-  }
-
-  .index-proof__meter {
-    width: min(112px, 100%);
-    height: 260px;
-    display: flex;
-    align-items: flex-end;
-    border-bottom: 2px solid var(--yellow);
-  }
-
-  .index-proof__bar {
-    width: 100%;
-    background: var(--yellow);
-    border-radius: 10px 10px 0 0;
-    min-height: 8px;
+    white-space: nowrap;
   }
 
   .index-proof__label {
@@ -152,8 +161,9 @@ const MAX_PAGES = 516;
     }
 
     .index-proof__meter {
-      height: 180px;
+      height: 220px;
       width: min(72px, 100%);
+      padding-top: 2.75rem;
     }
 
     .index-proof__label {
