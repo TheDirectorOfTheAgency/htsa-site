@@ -33,7 +33,10 @@ describe("voice session update", () => {
 describe("demo sales instructions", () => {
   it("keeps pricing on a call and only the approved proof figures", () => {
     const text = `${DEMO_SALES_INSTRUCTIONS}\n${demoInstructions(true)}`;
-    expect(text).toContain("call with Marshall");
+    expect(text).toContain("Join the Skool foyer");
+    expect(text).not.toContain("call with Marshall");
+    expect(text).not.toContain("Book a call");
+    expect(text).not.toContain("talk to Marshall");
     expect(text).toContain("$6,458.10");
     expect(text).toContain("best month $59,798.23");
     expect(text).toContain("$512,022.13");
@@ -42,7 +45,11 @@ describe("demo sales instructions", () => {
     expect(text).toContain("$59,632.98, $5,175");
     expect(text).not.toContain("$59,798.23, $5,175");
     expect(MONEYPENNY_CONSOLE_PROMPT).toContain("best month was $59,798.23");
+    expect(MONEYPENNY_CONSOLE_PROMPT).toContain("Join the Skool foyer");
     expect(MONEYPENNY_CONSOLE_PROMPT).not.toContain("$59,632");
+    expect(MONEYPENNY_CONSOLE_PROMPT).not.toContain("$2,000");
+    expect(MONEYPENNY_CONSOLE_PROMPT).not.toContain("call with Marshall");
+    expect(MONEYPENNY_CONSOLE_PROMPT).not.toContain("Book a call");
     expect(text).toContain("$5,175");
     expect(text).toContain("5,000+ TVs");
     expect(text).toContain("650+ reviews");

@@ -1,25 +1,34 @@
 ---
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
+import ProofStrip from "../components/ProofStrip.astro";
+import MapProof from "../components/MapProof.astro";
 import LastMoat from "../components/LastMoat.astro";
-import MeetMoneyPenny from "../components/MeetMoneyPenny.astro";
+import Story from "../components/Story.astro";
+import Fit from "../components/Fit.astro";
 import Curriculum from "../components/Curriculum.astro";
-import ClaimCta from "../components/ClaimCta.astro";
-import CloseLine from "../components/CloseLine.astro";
+import FieldBand from "../components/FieldBand.astro";
+import Faq from "../components/Faq.astro";
+import MeetMoneyPenny from "../components/MeetMoneyPenny.astro";
+import ClosingPair from "../components/ClosingPair.astro";
+import StickyCall from "../components/StickyCall.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<Base
-  title="High Ticket Service Academy | The last moat"
-  description="The trades are the last moat. High Ticket Service Academy teaches blue-collar operators to run their work like a business, with ads, SEO, and AI."
->
+<Base>
   <main>
     <Hero />
+    <ProofStrip />
+    <MapProof />
     <LastMoat />
-    <MeetMoneyPenny />
+    <Story />
+    <Fit />
     <Curriculum />
-    <ClaimCta />
-    <CloseLine />
+    <FieldBand />
+    <Faq />
+    <MeetMoneyPenny />
+    <ClosingPair />
   </main>
+  <StickyCall />
   <Footer />
 </Base>

@@ -1,6 +1,5 @@
 ---
-import MoneyPennyVoice from "./MoneyPennyVoice.astro";
-import { BOOKING_CTA, BOOKING_URL } from "../config";
+import { SKOOL_CTA, SKOOL_URL } from "../config";
 ---
 
 <section id="meet-moneypenny" class="meet section">
@@ -21,15 +20,21 @@ import { BOOKING_CTA, BOOKING_URL } from "../config";
         />
         <figcaption>MoneyPenny. She runs the office. Marshall runs the jobs.</figcaption>
       </figure>
-      <div class="meet__window">
-        <MoneyPennyVoice />
-        <p class="meet__book">
-          Ready to talk numbers? <a href={BOOKING_URL}>{BOOKING_CTA}</a>
-        </p>
+      <div class="meet__actions">
+        <button class="btn-primary" type="button" data-start-hero-voice>Talk to MoneyPenny</button>
+        <a class="meet__skool" href={SKOOL_URL}>{SKOOL_CTA}</a>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelector("[data-start-hero-voice]")?.addEventListener("click", () => {
+    const root = document.getElementById("moneypenny");
+    root?.scrollIntoView({ behavior: "smooth", block: "center" });
+    root?.querySelector<HTMLButtonElement>('[data-panel="idle"] .btn-mic')?.click();
+  });
+</script>
 
 <style>
   .meet {
@@ -57,7 +62,7 @@ import { BOOKING_CTA, BOOKING_URL } from "../config";
   .meet__grid {
     display: grid;
     gap: var(--space-6);
-    align-items: start;
+    align-items: center;
   }
 
   .meet__portrait {
@@ -79,24 +84,22 @@ import { BOOKING_CTA, BOOKING_URL } from "../config";
     font-size: var(--font-small);
   }
 
-  .meet__window :global(.ask-card) {
-    margin: 0;
-    max-width: none;
+  .meet__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
   }
 
-  .meet__book {
-    margin-top: var(--space-4);
-    color: var(--muted-on-dark);
-    font-size: var(--font-small);
-  }
-
-  .meet__book a {
+  .meet__skool {
     color: var(--yellow);
     text-decoration: underline;
     text-underline-offset: 3px;
+    font-size: var(--font-small);
+    letter-spacing: 0.04em;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 800px) {
     .meet__grid {
       grid-template-columns: 256px minmax(0, 1fr);
       gap: var(--space-7);

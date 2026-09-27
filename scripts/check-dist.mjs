@@ -6,12 +6,22 @@ const configSrc = readFileSync("src/config.ts", "utf8");
 
 const required = [
   "https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311",
-  "Book a call with Marshall",
-  "Or talk to MoneyPenny",
+  "ENTER THE SKOOL FOYER",
+  "A tiny Minneapolis TV mounting business.",
+  "I have no employees.",
+  "Hero image slot",
+  "player.vimeo.com/video/806355796",
+  "Watch the video, then bring your questions to MoneyPenny",
+  "Start in the foyer. Coaching is a separate step.",
+  "/heatmaps/samsung-frame-installation.webp",
+  "/heatmaps/mantel-mount-installation.webp",
+  "/heatmaps/corporate-tv-mounting.webp",
+  "/heatmaps/tv-mounting-minneapolis.webp",
+  "/heatmaps/tv-mounting.webp",
+  "/heatmaps/tv-mounting-near-me.webp",
   "The last moat",
-  "Every operator needs a MoneyPenny.",
   "AI can take the corner office. It can't mount the TV.",
-  "AI can do a lot. It still can't do your job. Get paid like it.",
+  "Every operator needs a MoneyPenny.",
   "Before the modules",
   "5 lessons, including AI vs. The Trades",
   "Beginners track",
@@ -24,6 +34,7 @@ const required = [
   "Conversion &amp; Sales Systems",
   "Profit Math: Tying It Together",
   "$6,458.10",
+  "$17,291.59",
   "$59,798.23",
   "$512,022.13",
   "Talk to MoneyPenny",
@@ -41,6 +52,11 @@ const forbidden = [
   "$1,497",
   "$25,000",
   "$59,632",
+  "$5,175",
+  "5,000+ TVs",
+  "650+ reviews",
+  "Book a call",
+  "call with Marshall",
   "Module 0",
   'type="email"',
   "AGENTMAIL",
@@ -62,14 +78,22 @@ for (const text of forbidden) {
   }
 }
 
-const allowedFigures = new Set(["$6,458.10", "$59,798.23", "$512,022.13"]);
+const allowedFigures = new Set([
+  "$6,458.10",
+  "$17,291.59",
+  "$2,152",
+  "$2,000",
+  "$5,000",
+  "$59,798.23",
+  "$512,022.13",
+]);
 for (const amount of distHtml.match(/\$\d[\d,]*(?:\.\d+)?/g) ?? []) {
   if (!allowedFigures.has(amount)) {
     console.error(`Unapproved figure on the home page: ${amount}`);
     process.exit(1);
   }
 }
-for (const retired of ["5,000+ TVs", "650+ reviews", "$17,291", "$59,632.98"]) {
+for (const retired of ["5,000+ TVs", "650+ reviews", "$59,632.98"]) {
   if (distHtml.includes(retired)) {
     console.error(`Retired claim on the home page: ${retired}`);
     process.exit(1);
@@ -113,6 +137,13 @@ function walk(dir) {
         console.error(`Voice agent id hardcoded in ${path}`);
         process.exit(1);
       }
+      const lowered = content.toLowerCase();
+      for (const phrase of ["book a call", "call with marshall"]) {
+        if (lowered.includes(phrase)) {
+          console.error(`Marshall-call CTA found in ${path}: ${phrase}`);
+          process.exit(1);
+        }
+      }
     }
   }
 }
@@ -128,7 +159,7 @@ if (!demoHtml.includes("North Loop TV Mounting")) {
   console.error("Demo page is missing the test placeholder");
   process.exit(1);
 }
-for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,632", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000"]) {
+for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,632", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000", "Book a call", "call with Marshall"]) {
   if (demoHtml.includes(text)) {
     console.error(`Demo page contains unapproved price: ${text}`);
     process.exit(1);

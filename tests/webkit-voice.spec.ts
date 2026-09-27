@@ -221,7 +221,9 @@ test("webkit demo page greets from the tap and keeps the test business on screen
     () => (window as unknown as { __sockets: { sent: string[] }[] }).__sockets[0].sent.join("\n"),
   );
   expect(sent).toContain("server_vad");
-  expect(sent).toContain("This is exactly what we fix inside HTSA - want me to tell you how Marshall can help?");
+  expect(sent).toContain("Join the Skool foyer and you'll see how he does it.");
+  expect(sent).not.toContain("call with Marshall");
+  expect(sent).not.toContain("Book a call");
   expect(sent).toContain("Retired claims, never say these");
   expect(sent).toContain("best month $59,798.23");
   expect(sent).toContain("$59,632.98, $5,175");

@@ -6,11 +6,6 @@ export const SKOOL_URL =
 
 export const SKOOL_CTA = "ENTER THE SKOOL FOYER";
 
-/** The repo has no separate calendar URL. Booking CTAs use the existing Skool door. */
-export const BOOKING_URL = SKOOL_URL;
-
-export const BOOKING_CTA = "Book a call with Marshall";
-
 export const PROOF = [
   { figure: "$6,458.10", label: "Best day, 2025-09-23" },
   { figure: "$59,798.23", label: "Best month, 2024-12" },
