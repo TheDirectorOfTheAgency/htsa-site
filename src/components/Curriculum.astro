@@ -1,0 +1,89 @@
+---
+import { CURRICULUM } from "../data/curriculum";
+---
+
+<section id="curriculum" class="curriculum section">
+  <div class="container">
+    <p class="eyebrow">Inside the Academy</p>
+    <h2 class="section-title">The other half of the moat</h2>
+    <p class="curriculum__intro">
+      Your hands already do the part AI can't. Everything inside is the other half of the moat: the business.
+    </p>
+    <div class="curriculum__grid">
+      {CURRICULUM.map((mod) => (
+        <article class="module-card">
+          <p class="module-card__num">{String(mod.number).padStart(2, "0")}</p>
+          <h3 class="module-card__title">{mod.title}</h3>
+          <p class="module-card__summary">{mod.summary}</p>
+          {mod.lessons.length > 0 && (
+            <ul>
+              {mod.lessons.map((lesson) => (
+                <li>{lesson}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .curriculum {
+    background: var(--white);
+  }
+
+  .curriculum .eyebrow {
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .curriculum__intro {
+    max-width: 38rem;
+    margin: var(--space-4) 0 var(--space-6);
+    font-size: 1.15rem;
+  }
+
+  .curriculum__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .module-card {
+    background: var(--grey-card);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+  }
+
+  .module-card__num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--font-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .module-card__title {
+    font-size: var(--font-card);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2);
+  }
+
+  .module-card__summary {
+    color: var(--muted);
+  }
+
+  .module-card ul {
+    margin-top: var(--space-4);
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 6px;
+  }
+
+  @media (min-width: 800px) {
+    .curriculum__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

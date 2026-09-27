@@ -6,17 +6,19 @@ const configSrc = readFileSync("src/config.ts", "utf8");
 
 const required = [
   "https://www.skool.com/high-ticket-home-services-2405/about?ref=d0cdfe08b24e46c8a65c29fa0af73311",
-  "ENTER THE SKOOL FOYER",
+  "Book a call with Marshall",
+  "Or talk to MoneyPenny",
+  "The last moat",
+  "Every operator needs a MoneyPenny.",
+  "AI can take the corner office. It can't mount the TV.",
+  "AI can do a lot. It still can't do your job. Get paid like it.",
+  "Line to come, mapped from live Skool.",
   "$6,458.10",
   "$59,632.98",
   "$512,022.13",
-  "Hero image slot",
-  "player.vimeo.com/video/806355796",
-  "A tiny Minneapolis TV mounting business.",
-  "I have no employees.",
-  "$17,291.59",
-  "This is not a done-for-you marketing service or an installed AI operations team.",
   "Talk to MoneyPenny",
+  "MoneyPenny, Marshall Wayne's AI right hand: blonde, dark round glasses, confident and direct.",
+  "/images/moneypenny-profile.png",
   'rel="dns-prefetch" href="https://api.x.ai"',
   'rel="preconnect" href="https://api.x.ai"',
 ];
@@ -45,6 +47,20 @@ const lower = distHtml.toLowerCase();
 for (const text of forbidden) {
   if (lower.includes(text.toLowerCase())) {
     console.error(`Forbidden string found: ${text}`);
+    process.exit(1);
+  }
+}
+
+const allowedFigures = new Set(["$6,458.10", "$59,632.98", "$512,022.13"]);
+for (const amount of distHtml.match(/\$\d[\d,]*(?:\.\d+)?/g) ?? []) {
+  if (!allowedFigures.has(amount)) {
+    console.error(`Unapproved figure on the home page: ${amount}`);
+    process.exit(1);
+  }
+}
+for (const retired of ["5,000+ TVs", "650+ reviews", "$17,291"]) {
+  if (distHtml.includes(retired)) {
+    console.error(`Retired claim on the home page: ${retired}`);
     process.exit(1);
   }
 }

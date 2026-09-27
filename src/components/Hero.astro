@@ -1,190 +1,77 @@
 ---
-import AssetSlot from "./AssetSlot.astro";
-import MoneyPennyVoice from "./MoneyPennyVoice.astro";
-import { SKOOL_URL, SKOOL_CTA } from "../config";
+import { BOOKING_CTA, BOOKING_URL } from "../config";
 ---
 
 <section class="hero">
-  <AssetSlot variant="image" />
   <div class="hero__inner container">
-    <div class="hero__badge">
-      <span>Owner-operator</span>
-      <span class="hero__badge-right">No employees</span>
-    </div>
-
-    <h1 class="hero__title">
-      <span>A tiny Minneapolis TV mounting business.</span>
-      <span>A <em class="accent">$59,632.98 month.</em></span>
-    </h1>
-
+    <p class="eyebrow">High Ticket Service Academy</p>
+    <h1 class="hero__title">AI can take the corner office. It can't mount the TV.</h1>
     <p class="hero__sub">
-      Hello, my name is Marshall Wayne, owner of a small TV mounting business called The Mounting Man, based out of Minneapolis. With Google Ads, creative search engine optimization, and a relentless focus on high-ticket jobs, I've had a $6,458.10 day, a $17,291.59 week, and a $59,632.98 month. I have no employees. I do the jobs myself, and once in a while I bring along a helper or a service technician. In The Agency, I'll coach you to do the same in your trade.
+      The trades are the last moat. High Ticket Service Academy teaches blue-collar operators to run their work like a business, with ads, SEO, and AI, and to charge what it's worth.
     </p>
-
-    <AssetSlot variant="video" />
-
-    <p class="hero__handoff">Watch the video, then bring your questions to MoneyPenny. She runs things for Mr. Wayne.</p>
-
-    <MoneyPennyVoice />
-
-    <div class="hero__cta-row">
-      <a class="btn-primary hero__cta" href={SKOOL_URL}>
-        {SKOOL_CTA}
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <div class="hero__social">
-        <div class="hero__avatars" aria-hidden="true">
-          <span class="hero__avatar hero__avatar--yellow"></span>
-          <span class="hero__avatar hero__avatar--white"></span>
-          <span class="hero__avatar hero__avatar--charcoal"></span>
-        </div>
-        <p class="hero__note">Start in the foyer. Coaching is a separate step.</p>
-      </div>
+    <div class="hero__cta">
+      <a class="btn-primary" href={BOOKING_URL}>{BOOKING_CTA}</a>
+      <a class="hero__secondary" href="#meet-moneypenny">Or talk to MoneyPenny</a>
     </div>
-
   </div>
 </section>
 
 <style>
   .hero {
-    position: relative;
     background: var(--black);
     color: var(--white);
-    padding-top: var(--space-8);
+    padding-top: var(--space-9);
     padding-bottom: var(--space-9);
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-    background-size: 24px 24px;
-    pointer-events: none;
-    z-index: 1;
   }
 
   .hero__inner {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-5);
-    text-align: center;
   }
 
-  .hero__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: 6px 6px 6px 14px;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--line);
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 0.8125rem;
-    color: var(--muted-on-dark);
-  }
-
-  .hero__badge-right {
-    padding: 4px 12px;
-    border-radius: var(--radius-pill);
-    background: var(--white);
-    color: var(--ink);
-    font-weight: 600;
+  .hero .eyebrow {
+    color: var(--yellow);
   }
 
   .hero__title {
     font-size: var(--font-hero);
     font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    max-width: 22ch;
-  }
-
-  .hero__title em {
-    font-style: normal;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
   }
 
   .hero__sub {
-    max-width: 78ch;
-    font-size: var(--font-body);
+    max-width: 38rem;
+    font-size: 1.2rem;
     color: var(--muted-on-dark);
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
-  .hero__handoff {
-    font-size: var(--font-small);
-    color: var(--muted-on-dark);
-    margin-bottom: calc(var(--space-2) * -1);
-  }
-
-  .hero__cta-row {
+  .hero__cta {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space-5);
-  }
-
-  .hero__social {
-    display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-5);
+    margin-top: var(--space-3);
   }
 
-  .hero__avatars {
-    display: flex;
+  .hero__secondary {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: var(--font-body);
   }
 
-  .hero__avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 2px solid var(--black);
-    margin-left: -10px;
-  }
-
-  .hero__avatar:first-child {
-    margin-left: 0;
-  }
-
-  .hero__avatar--yellow {
-    background: var(--yellow);
-  }
-
-  .hero__avatar--white {
-    background: var(--white);
-  }
-
-  .hero__avatar--charcoal {
-    background: #3a3a3a;
-  }
-
-  .hero__note {
-    font-family: "Caveat", cursive;
-    font-size: var(--font-note);
-    font-weight: 500;
-    color: var(--muted-on-dark);
-    max-width: 16ch;
-    text-align: left;
-    line-height: 1.2;
+  .hero__secondary:hover {
+    color: var(--yellow);
   }
 
   @media (max-width: 767px) {
-    .hero__cta-row {
-      flex-direction: column;
-    }
-
-    .hero__social {
-      flex-direction: column;
-    }
-
-    .hero__note {
-      text-align: center;
+    .hero {
+      padding-top: var(--space-8);
     }
   }
 </style>

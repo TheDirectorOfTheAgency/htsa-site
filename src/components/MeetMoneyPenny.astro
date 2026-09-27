@@ -1,0 +1,105 @@
+---
+import MoneyPennyVoice from "./MoneyPennyVoice.astro";
+import { BOOKING_CTA, BOOKING_URL } from "../config";
+---
+
+<section id="meet-moneypenny" class="meet section">
+  <div class="container">
+    <p class="eyebrow">Meet MoneyPenny</p>
+    <h2 class="section-title">Every operator needs a MoneyPenny.</h2>
+    <p class="meet__intro">
+      MoneyPenny is my right hand. She keeps the office, the numbers, and the details in order so I can stay on the job, and she'll answer your questions about the Academy the same way: straight, and without wasting your time.
+    </p>
+
+    <div class="meet__grid">
+      <figure class="meet__portrait">
+        <img
+          src="/images/moneypenny-profile.png"
+          width="256"
+          height="256"
+          alt="MoneyPenny, Marshall Wayne's AI right hand: blonde, dark round glasses, confident and direct."
+        />
+        <figcaption>MoneyPenny. She runs the office. Marshall runs the jobs.</figcaption>
+      </figure>
+      <div class="meet__window">
+        <MoneyPennyVoice />
+        <p class="meet__book">
+          Ready to talk numbers? <a href={BOOKING_URL}>{BOOKING_CTA}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .meet {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .meet .eyebrow {
+    color: var(--yellow);
+    margin-bottom: var(--space-4);
+  }
+
+  .meet .section-title {
+    max-width: 16ch;
+    margin-bottom: var(--space-4);
+  }
+
+  .meet__intro {
+    max-width: 42rem;
+    color: var(--muted-on-dark);
+    font-size: 1.15rem;
+    margin-bottom: var(--space-7);
+  }
+
+  .meet__grid {
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .meet__portrait {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .meet__portrait img {
+    width: 256px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 28px;
+  }
+
+  .meet__portrait figcaption {
+    max-width: 16rem;
+    color: var(--muted-on-dark);
+    font-size: var(--font-small);
+  }
+
+  .meet__window :global(.ask-card) {
+    margin: 0;
+    max-width: none;
+  }
+
+  .meet__book {
+    margin-top: var(--space-4);
+    color: var(--muted-on-dark);
+    font-size: var(--font-small);
+  }
+
+  .meet__book a {
+    color: var(--yellow);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (min-width: 900px) {
+    .meet__grid {
+      grid-template-columns: 256px minmax(0, 1fr);
+      gap: var(--space-7);
+    }
+  }
+</style>

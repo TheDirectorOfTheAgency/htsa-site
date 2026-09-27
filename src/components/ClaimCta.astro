@@ -1,0 +1,45 @@
+---
+import { BOOKING_CTA, BOOKING_URL } from "../config";
+---
+
+<section id="book" class="claim section">
+  <div class="container claim__inner">
+    <h2 class="section-title">Claim your share.</h2>
+    <p>
+      The towers are handing their work to agents. Yours is still yours. Book a call with me. Tell me what you do and where you want to take it, and we'll see if this is the right fit. We talk numbers on the call.
+    </p>
+    <a class="btn-primary" href={BOOKING_URL}>{BOOKING_CTA}</a>
+    <p class="claim__alt"><a href="#meet-moneypenny">Questions first? Talk to MoneyPenny.</a></p>
+  </div>
+</section>
+
+<style>
+  .claim {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .claim__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    max-width: 40rem;
+  }
+
+  .claim p {
+    font-size: 1.2rem;
+    color: var(--muted-on-dark);
+  }
+
+  .claim__alt a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: var(--font-body);
+  }
+
+  .claim__alt a:hover {
+    color: var(--yellow);
+  }
+</style>
