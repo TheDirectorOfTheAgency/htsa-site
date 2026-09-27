@@ -42,6 +42,12 @@ const required = [
   "/images/moneypenny-profile.png",
   'rel="dns-prefetch" href="https://api.x.ai"',
   'rel="preconnect" href="https://api.x.ai"',
+  "~25 to 516 pages on Google.",
+  "before the rebuild",
+  "Jun 29, 2026",
+  "344",
+  "Sep 3, 2026",
+  "516",
 ];
 
 const forbidden = [
