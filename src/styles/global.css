@@ -1,0 +1,128 @@
+@import "@fontsource/inter-tight/400.css";
+@import "@fontsource/inter-tight/500.css";
+@import "@fontsource/inter-tight/600.css";
+@import "@fontsource/inter-tight/700.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/caveat/500.css";
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter Tight", system-ui, sans-serif;
+  font-size: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 88px;
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  width: var(--container);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: var(--font-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: var(--font-section);
+  font-weight: 650;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  background: var(--yellow);
+  color: var(--yellow-ink);
+  font-size: var(--font-button);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-primary:focus-visible,
+.btn-call:focus-visible,
+.btn-mic:focus-visible,
+.btn-end:focus-visible,
+.btn-retry:focus-visible,
+.nav-link:focus-visible,
+.nav-pill a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-dark);
+  font-size: var(--font-small);
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--white);
+}
+
+.btn-call:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.accent {
+  color: var(--yellow);
+}

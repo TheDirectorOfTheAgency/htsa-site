@@ -1,0 +1,103 @@
+---
+const modules = [
+  {
+    num: "01",
+    title: "Pricing Architecture",
+    body: "Build a pricing framework for your services, packages, and positioning. Use The Mounting Man's examples to work through the decisions in your own business.",
+  },
+  {
+    num: "02",
+    title: "Lead Generation Engine",
+    body: "Google Ads, SEO, and referral systems that generate a steady stream of high-intent customers who are ready to pay premium rates.",
+  },
+  {
+    num: "03",
+    title: "Operations & Systems",
+    body: "Booking, scheduling, invoicing, and customer management systems that run your business like a machine — even when you're not there.",
+  },
+  {
+    num: "04",
+    title: "Sales & Closing",
+    body: "Scripts, objection handlers, and positioning strategies that close jobs at premium rates. No sleazy tactics — just confidence backed by systems.",
+  },
+  {
+    num: "05",
+    title: "Scaling & Hiring",
+    body: "When you're ready to grow beyond yourself — hiring, training, dispatching, and quality control systems that maintain your brand standard.",
+  },
+  {
+    num: "06",
+    title: "Brand & Authority",
+    body: "Build a brand that makes customers choose you before they even see your price. Reviews, content, reputation — the moat that competitors can't cross.",
+  },
+];
+---
+
+<section id="curriculum" class="modules section">
+  <div class="container">
+    <h2 class="section-title modules__title">The Playbook</h2>
+    <div class="modules__grid">
+      {modules.map((mod) => (
+        <article class="module-card">
+          <span class="module-card__num">{mod.num}</span>
+          <h3 class="module-card__title">{mod.title}</h3>
+          <p class="module-card__body">{mod.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .modules {
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .modules__title {
+    margin-bottom: var(--space-7);
+  }
+
+  .modules__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .module-card {
+    padding: var(--space-6);
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-card);
+    background: var(--white);
+  }
+
+  .module-card__num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--font-eyebrow);
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .module-card__title {
+    font-size: var(--font-card);
+    font-weight: 650;
+    margin: var(--space-3) 0 var(--space-3);
+    letter-spacing: -0.02em;
+  }
+
+  .module-card__body {
+    font-size: var(--font-small);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (min-width: 768px) {
+    .modules__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .modules__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

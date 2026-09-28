@@ -1,0 +1,91 @@
+---
+---
+
+<section class="field section">
+  <div class="container">
+    <p class="eyebrow field__eyebrow">IN THE FIELD</p>
+    <h2 class="section-title field__title">Run together. Proven together.</h2>
+    <p class="field__body">
+      Operator-grade systems built in the field, not in a classroom. Frame / mantel / porcelain / in-wall cable. The Mounting Man's results are operator proof, not a promise of your results.
+    </p>
+    <div class="field__strip">
+      <div class="field__card field__card--wide">
+        <span class="field__card-label">Twin Cities</span>
+      </div>
+      <div class="field__card">
+        <span class="field__card-label">Frame</span>
+      </div>
+      <div class="field__card">
+        <span class="field__card-label">Mantel</span>
+      </div>
+      <div class="field__card">
+        <span class="field__card-label">Porcelain</span>
+      </div>
+      <div class="field__card">
+        <span class="field__card-label">In-wall cable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .field {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .field__eyebrow {
+    color: var(--muted-on-dark);
+    margin-bottom: var(--space-4);
+  }
+
+  .field__title {
+    margin-bottom: var(--space-5);
+    max-width: 20ch;
+  }
+
+  .field__body {
+    color: var(--muted-on-dark);
+    max-width: 52ch;
+    margin-bottom: var(--space-7);
+    line-height: 1.6;
+  }
+
+  .field__strip {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 4px;
+  }
+
+  .field__card {
+    min-height: 120px;
+    border-radius: 12px;
+    background: #1a1a1a;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-4);
+  }
+
+  .field__card--wide {
+    min-height: 160px;
+  }
+
+  .field__card-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted-on-dark);
+  }
+
+  @media (max-width: 767px) {
+    .field__strip {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field__card--wide {
+      grid-column: span 2;
+    }
+  }
+</style>

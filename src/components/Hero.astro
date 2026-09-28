@@ -1,0 +1,181 @@
+---
+import AssetSlot from "./AssetSlot.astro";
+import MoneyPennyVoice from "./MoneyPennyVoice.astro";
+import { SKOOL_URL, SKOOL_CTA } from "../config";
+---
+
+<section class="hero">
+  <AssetSlot variant="image" />
+  <div class="hero__inner container">
+    <div class="hero__badge">
+      <span>Coaching + community foyer</span>
+      <span class="hero__badge-right">Skool foyer</span>
+    </div>
+
+    <h1 class="hero__title">
+      <span>You don't enroll in a course.</span>
+      <span>You join <em class="accent">the Agency.</em></span>
+    </h1>
+
+    <p class="hero__sub">
+      Six-week operator coaching for home service owners. Learn the marketing, positioning, and pricing systems used at The Mounting Man, then apply them in your own business. Coaching is $2,000–$5,000. Start in the Skool foyer.
+    </p>
+
+    <MoneyPennyVoice />
+
+    <div class="hero__cta-row">
+      <a class="btn-primary hero__cta" href={SKOOL_URL}>
+        {SKOOL_CTA}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <div class="hero__social">
+        <div class="hero__avatars" aria-hidden="true">
+          <span class="hero__avatar hero__avatar--yellow"></span>
+          <span class="hero__avatar hero__avatar--white"></span>
+          <span class="hero__avatar hero__avatar--charcoal"></span>
+        </div>
+        <p class="hero__note">Start in the foyer. Coaching is a separate step.</p>
+      </div>
+    </div>
+
+    <AssetSlot variant="video" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+    padding-top: 112px;
+    padding-bottom: var(--space-9);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 6px 6px 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.4);
+    font-size: 0.8125rem;
+    color: var(--muted-on-dark);
+  }
+
+  .hero__badge-right {
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-size: var(--font-hero);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+  }
+
+  .hero__title em {
+    font-style: normal;
+  }
+
+  .hero__sub {
+    max-width: 52ch;
+    font-size: var(--font-body);
+    color: var(--muted-on-dark);
+    line-height: 1.6;
+  }
+
+  .hero__cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+  }
+
+  .hero__social {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .hero__avatars {
+    display: flex;
+  }
+
+  .hero__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    margin-left: -10px;
+  }
+
+  .hero__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .hero__avatar--yellow {
+    background: var(--yellow);
+  }
+
+  .hero__avatar--white {
+    background: var(--white);
+  }
+
+  .hero__avatar--charcoal {
+    background: #3a3a3a;
+  }
+
+  .hero__note {
+    font-family: "Caveat", cursive;
+    font-size: var(--font-note);
+    font-weight: 500;
+    color: var(--muted-on-dark);
+    max-width: 16ch;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 767px) {
+    .hero__cta-row {
+      flex-direction: column;
+    }
+
+    .hero__social {
+      flex-direction: column;
+    }
+
+    .hero__note {
+      text-align: center;
+    }
+  }
+</style>

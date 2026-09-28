@@ -1,0 +1,50 @@
+:root {
+  --yellow: #FDBE17;
+  --yellow-ink: #1A1400;
+  --black: #0C0C0C;
+  --hero-slot: #141414;
+  --white: #FFFFFF;
+  --ink: #141414;
+  --muted: #5E5E5E;
+  --muted-on-dark: #C8C8C8;
+  --grey-card: #E8E8E8;
+  --line: rgba(255, 255, 255, 0.14);
+  --line-dark: rgba(0, 0, 0, 0.08);
+  --glass: rgba(20, 20, 20, 0.72);
+  --danger: #8F2D2D;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-pill: 999px;
+  --radius-card: 20px;
+  --radius-frame: 24px;
+  --radius-ask: 18px;
+
+  --font-hero: clamp(2.75rem, 5.4vw, 4.75rem);
+  --font-section: clamp(2.25rem, 4vw, 3.5rem);
+  --font-card: 1.5rem;
+  --font-body: 1.0625rem;
+  --font-small: 0.9375rem;
+  --font-eyebrow: 0.75rem;
+  --font-proof: clamp(1.75rem, 3vw, 2.75rem);
+  --font-note: 1.35rem;
+  --font-button: 0.875rem;
+
+  --container: min(1120px, calc(100% - 48px));
+  --section-pad: 96px;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --container: calc(100% - 32px);
+    --section-pad: 64px;
+  }
+}
