@@ -12,7 +12,7 @@ const required = [
   "Hero image slot",
   "player.vimeo.com/video/806355796",
   "Watch the video, then bring your questions to MoneyPenny",
-  "Start in the free foyer. Coaching is $1,997 a month, by application.",
+  "Join the foyer for $1/month. Coaching is $1,997 a month, 3-month minimum, by application.",
   "/heatmaps/samsung-frame-installation.webp",
   "/heatmaps/mantel-mount-installation.webp",
   "/heatmaps/corporate-tv-mounting.webp",
@@ -51,6 +51,10 @@ const required = [
 ];
 
 const forbidden = [
+  "free foyer",
+  "foyer is free",
+  "start free",
+  "starts at",
   "limited time",
   "countdown",
   "offer ends",
@@ -89,6 +93,8 @@ const allowedFigures = new Set([
   "$17,291.59",
   "$2,152",
   "$1,997",
+  "$5,991",
+  "$1",
   "$59,798.23",
   "$512,022.13",
 ]);
