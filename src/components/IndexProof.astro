@@ -1,0 +1,173 @@
+---
+/** Google Search Console indexed-page counts for The Mounting Man. No date for the pre-rebuild point. */
+const POINTS = [
+  { pages: 25, value: "~25", label: "before the rebuild" },
+  { pages: 344, value: "344", label: "Jun 29, 2026" },
+  { pages: 516, value: "516", label: "Sep 3, 2026" },
+] as const;
+
+const MAX_PAGES = 516;
+---
+
+<section class="index-proof section" aria-labelledby="index-proof-heading">
+  <div class="container">
+    <div class="index-proof__panel">
+      <p class="eyebrow index-proof__eyebrow">Indexed pages</p>
+      <h2 id="index-proof-heading" class="section-title index-proof__title">~25 to 516 pages on Google.</h2>
+      <p class="index-proof__caption">
+        What happened when I rebuilt The Mounting Man site with city pages and install posts. Indexed pages, Google Search Console.
+      </p>
+      <div
+        class="index-proof__chart"
+        role="img"
+        aria-label="Bar chart of Google indexed pages for The Mounting Man: about 25 before the rebuild, 344 on June 29, 2026, and 516 on September 3, 2026."
+      >
+        {POINTS.map((point) => (
+          <div class="index-proof__col">
+            <div class="index-proof__meter">
+              <div
+                class="index-proof__bar"
+                style={`height: ${((point.pages / MAX_PAGES) * 100).toFixed(3)}%`}
+              >
+                <span class="index-proof__value">{point.value}</span>
+              </div>
+            </div>
+            <p class="index-proof__label">{point.label}</p>
+          </div>
+        ))}
+      </div>
+      <p class="index-proof__sr">
+        About 25 pages indexed before the rebuild, 344 pages on June 29, 2026, and 516 pages on September 3, 2026. Google Search Console.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .index-proof {
+    background: var(--white);
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .index-proof__panel {
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+    border-radius: var(--radius-frame);
+    padding: var(--space-7) var(--space-6) var(--space-6);
+    text-align: center;
+  }
+
+  .index-proof__eyebrow {
+    color: var(--yellow);
+    margin-bottom: var(--space-4);
+  }
+
+  .index-proof__title {
+    margin-bottom: var(--space-4);
+  }
+
+  .index-proof__caption {
+    color: var(--muted-on-dark);
+    font-size: var(--font-body);
+    line-height: 1.6;
+    max-width: 46ch;
+    margin: 0 auto var(--space-7);
+  }
+
+  .index-proof__chart {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+    align-items: end;
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  .index-proof__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .index-proof__meter {
+    width: min(112px, 100%);
+    height: 320px;
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding-top: 4rem;
+    border-bottom: 2px solid var(--yellow);
+  }
+
+  .index-proof__bar {
+    position: relative;
+    width: 100%;
+    background: var(--yellow);
+    border-radius: 10px 10px 0 0;
+    min-height: 8px;
+  }
+
+  .index-proof__value {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+    font-size: var(--font-proof);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    color: var(--yellow);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .index-proof__label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-on-dark);
+    text-align: center;
+    line-height: 1.45;
+    max-width: 16ch;
+  }
+
+  .index-proof__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 767px) {
+    .index-proof__panel {
+      padding: var(--space-6) var(--space-4) var(--space-5);
+      border-radius: var(--radius-card);
+    }
+
+    .index-proof__caption {
+      margin-bottom: var(--space-6);
+    }
+
+    .index-proof__chart {
+      gap: var(--space-3);
+    }
+
+    .index-proof__meter {
+      height: 220px;
+      width: min(72px, 100%);
+      padding-top: 2.75rem;
+    }
+
+    .index-proof__label {
+      letter-spacing: 0.02em;
+    }
+  }
+</style>

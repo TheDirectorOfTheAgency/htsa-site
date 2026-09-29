@@ -56,7 +56,7 @@ describe("demo sales instructions", () => {
     expect(text).toContain("Retired claims, never say these");
     expect(text).not.toContain("$2,000");
     expect(text).not.toContain("$17,291");
-    for (const price of ["$97", "$497", "$1,997", "$1997", "$1,497", "$15,000"]) {
+    for (const price of ["$97", "$497", "$1,497", "$15,000"]) {
       expect(text).not.toContain(price);
     }
   });

@@ -230,7 +230,7 @@ test("webkit demo page greets from the tap and keeps the test business on screen
   expect(sent).toContain("5,000+ TVs");
   expect(sent).toContain("650+ reviews");
   expect(sent).not.toContain("$497");
-  expect(sent).not.toContain("$1,997");
+  expect(sent).toContain("$1,997 a month");
   expect(sent).not.toContain("$2,000");
   await expect(page.locator("#demo-voice")).toHaveAttribute("data-audio-unlocked", "1");
 });
