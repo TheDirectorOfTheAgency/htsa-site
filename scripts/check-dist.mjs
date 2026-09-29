@@ -12,7 +12,7 @@ const required = [
   "Hero image slot",
   "player.vimeo.com/video/806355796",
   "Watch the video, then bring your questions to MoneyPenny",
-  "Start in the foyer. Coaching is a separate step.",
+  "Start in the free foyer. Coaching is $1,997 a month, by application.",
   "/heatmaps/samsung-frame-installation.webp",
   "/heatmaps/mantel-mount-installation.webp",
   "/heatmaps/corporate-tv-mounting.webp",
@@ -88,6 +88,7 @@ const allowedFigures = new Set([
   "$6,458.10",
   "$17,291.59",
   "$2,152",
+  "$1,997",
   "$59,798.23",
   "$512,022.13",
 ]);
@@ -163,7 +164,7 @@ if (!demoHtml.includes("North Loop TV Mounting")) {
   console.error("Demo page is missing the test placeholder");
   process.exit(1);
 }
-for (const text of ["$97", "$497", "$1,997", "$1,497", "$59,632", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000", "Book a call", "call with Marshall"]) {
+for (const text of ["$97", "$497", "$1,497", "$59,632", "$5,175", "5,000+ TVs", "650+ reviews", "$2,000", "Book a call", "call with Marshall"]) {
   if (demoHtml.includes(text)) {
     console.error(`Demo page contains unapproved price: ${text}`);
     process.exit(1);
