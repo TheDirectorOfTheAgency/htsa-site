@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/webinar/styles.css">
 </head>
-<body>
+<body class="page-webinar">
     <nav class="nav">
         <div class="container nav-inner">
             <a href="/" class="nav-brand">THE AGENCY</a>
@@ -117,5 +117,11 @@
         </div>
     </footer>
 
+    <script>
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+    </script>
 </body>
 </html>

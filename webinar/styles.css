@@ -97,10 +97,8 @@ body {
     background: var(--black);
 }
 .hero-media {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    width: 100%;
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
@@ -136,15 +134,11 @@ body {
 .hero-copy {
     position: relative;
     z-index: 2;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-top: 42vh;
-    padding-bottom: 36px;
-    background: linear-gradient(to top, #080808 0%, rgba(8,8,8,0.97) 52%, rgba(8,8,8,0.82) 62%, rgba(8,8,8,0) 76%);
+    min-height: 0;
+    padding: 72px 0 48px;
+    background: var(--black);
 }
+.hero-panel { background: none; }
 .hero-eyebrow {
     font-size: 0.75rem;
     font-weight: 600;
@@ -317,11 +311,19 @@ button.btn-primary:disabled { opacity: 0.6; cursor: wait; }
 .footer p { font-size: 0.75rem; color: var(--gray-mid); letter-spacing: 1px; }
 
 @media (min-width: 431px) {
-    .hero-copy { background: none; }
-    .hero-panel {
-        background: linear-gradient(to top, #080808 86%, rgba(8,8,8,0.96) 100%);
-        padding-top: 12px;
+    .page-webinar .nav {
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
     }
+    .page-webinar .nav.scrolled {
+        background: rgba(8,8,8,0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(212,168,67,0.1);
+    }
+    .hero-panel { background: none; padding: 0; }
 }
 
 @media (max-width: 900px) {
