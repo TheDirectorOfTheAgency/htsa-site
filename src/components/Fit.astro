@@ -1,0 +1,57 @@
+---
+import { SKOOL_URL } from "../config";
+---
+
+<section id="why-us" class="fit section">
+  <div class="container fit__grid">
+    <div class="fit__block">
+      <h2 class="section-title">Who This Is For</h2>
+      <p>You run a home service business. You are good at the work. You show up, you deliver, and your customers are happy. But you know your revenue doesn't reflect your ability — and you've started to suspect that marketing is the gap. You've hired agencies. Maybe they delivered, maybe they didn't. Either way, you felt like a number, not a partner. Nobody on the other side had ever done the installs. You're not looking for hacks. You're not looking for someone to do it for you. You want to understand the machine — how to build it, how to price it, how to position it so that customers come to you already sold. If that's you, keep reading.</p>
+    </div>
+    <div class="fit__block">
+      <h2 class="section-title">Three ways to work with me</h2>
+      <h3>The Foyer — $1/month</h3>
+      <p>Join the HTSA community on Skool, read the tips I post on pricing, Google, and getting paid what the job is worth, and learn alongside other home service owners.</p>
+      <a class="btn-primary" href={SKOOL_URL}>Join the Foyer for $1/month</a>
+      <h3>The Roadmap Course — $497 one-time</h3>
+      <p>The full system, pay once with lifetime access. It doesn&#39;t include access to me: no calls, no DMs, and no Q&amp;A.</p>
+      <a class="btn-primary" href="https://www.skool.com/high-ticket-home-services-2405/classroom/42b0c716">Get the Roadmap for $497</a>
+      <h3>Founding Members (Done With You) — $1,997/month</h3>
+      <p>We set up your agents and your whole system the way The Mounting Man runs, working on one thing at a time, done with you.</p>
+      <p>Includes personal access to me, weekly live calls, and my personal number for your questions.</p>
+      <p>The Foyer and Founding Members are month to month. Cancel anytime.</p>
+      <a class="btn-primary" href={SKOOL_URL}>Become a Founding Member at $1,997/month</a>
+      <p>My numbers are my proof, not a promise of yours.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fit {
+    background: var(--white);
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .fit__grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .fit__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .fit__block p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  @media (min-width: 960px) {
+    .fit__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>

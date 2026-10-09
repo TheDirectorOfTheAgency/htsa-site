@@ -1,0 +1,105 @@
+---
+import { SKOOL_URL, SKOOL_CTA } from "../config";
+---
+
+<section id="packages" class="packages section">
+  <div class="container">
+    <h2 class="section-title packages__title">One door.</h2>
+    <p class="packages__intro">Coaching is $1,997 a month, month to month.</p>
+
+    <div class="packages__grid">
+      <article class="package-card">
+        <h3 class="package-card__title">Foyer</h3>
+        <p class="package-card__body">Skool is the foyer. Join for $1/month to see The Agency. Entering the foyer does not buy the coaching engagement.</p>
+        <a class="btn-primary package-card__cta" href={SKOOL_URL}>{SKOOL_CTA}</a>
+      </article>
+
+      <article class="package-card">
+        <h3 class="package-card__title">Coaching</h3>
+        <p class="package-card__body">Monthly operator coaching. Direct access to the person who built The Mounting Man, including a monthly call with him. You do the work in your business. Subscribe directly, with no application. Seats are limited to what Mr. Wayne can coach himself.</p>
+        <p class="package-card__price">$1,997/month</p>
+        <p class="package-card__price-note">Month to month. Cancel anytime. We recommend 3 months.</p>
+        <a class="btn-primary package-card__cta" href={SKOOL_URL}>{SKOOL_CTA}</a>
+      </article>
+
+      <article class="package-card package-card--boundary">
+        <h3 class="package-card__title">Not included</h3>
+        <p class="package-card__body">This is not a done-for-you marketing service or an installed AI operations team.</p>
+        <p class="package-card__body">The Mounting Man's results are operator proof, not a promise of your results.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .packages {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .packages__title,
+  .packages__intro {
+    text-align: center;
+  }
+
+  .packages__intro {
+    color: var(--muted-on-dark);
+    margin: var(--space-4) 0 var(--space-7);
+  }
+
+  .packages__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .package-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    background: var(--white);
+    color: var(--ink);
+    min-height: 320px;
+  }
+
+  .package-card__title {
+    font-size: var(--font-card);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+
+  .package-card__body {
+    font-size: var(--font-small);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .package-card__price {
+    font-size: 1.75rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+
+  .package-card__price-note {
+    font-size: var(--font-small);
+    color: var(--muted);
+  }
+
+  .package-card__cta {
+    margin-top: auto;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+  }
+
+  .package-card--boundary {
+    background: #f0f0f0;
+  }
+
+  @media (min-width: 768px) {
+    .packages__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

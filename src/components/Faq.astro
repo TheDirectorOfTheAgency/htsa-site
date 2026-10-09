@@ -1,0 +1,105 @@
+---
+const faqs = [
+  {
+    q: "What does Premium actually do for my business?",
+    a: "We set up your agents and your whole system the way The Mounting Man runs. That does two things. You cut a lot of waste, starting with your Google Ads. And you make more on every job, through higher prices, a brand with Hollywood polish that attracts people who pay more, and marketing aimed at the wealthiest neighborhoods in your area.",
+  },
+  {
+    q: "Will I make what you made?",
+    a: "My best year with The Mounting Man was $512,022.13. My numbers are my proof, not a promise of yours. Your results depend on your market and your work. What I can promise is that you'll get the same system I used and my help putting it to work in your business.",
+  },
+  {
+    q: "How do the agents find Google Ads waste?",
+    a: "You give my agents access to your Google Ads account. They go through your spend and search terms and flag the clicks and budget that aren't booking jobs. We go over what they find together and decide what to cut, one thing at a time.",
+  },
+  {
+    q: "What if I don't run Google Ads yet?",
+    a: "Then we start with your prices, your brand, and your Google profile, so the business is ready before you put money into ads.",
+  },
+  {
+    q: "What does \"founding member\" mean?",
+    a: "You're one of the first people in the group. Right now that gets you the most of my time: weekly live calls, my personal number, and hands-on help. It isn't a promise that access stays exactly the same forever. As the group grows, how I give access may change. What doesn't change is this: Everything inside is included at $1,997/mo: every course, system, and resource, now and anything added later, for as long as you stay subscribed.",
+  },
+  {
+    q: "Is this done-for-you?",
+    a: "No. It's done with you. We pick one thing at a time, whatever matters most for your business right now, and work on it together until it's handled. Then we move to the next one.",
+  },
+  {
+    q: "What else can I get help with?",
+    a: "SEO, AEO (showing up when people ask AI for a recommendation), Facebook ads, and anything in the High-Ticket Service Academy or in how I built The Mounting Man. I'll also help you build your own AI agents to take care of your business.",
+  },
+  {
+    q: "How is the course different from Premium?",
+    a: "The course is the full system, built for owners who want to work it on their own. It's $497 one time with lifetime access, and it doesn't include access to me: no calls, no DMs, and no Q&A. Premium is for owners who want me in their corner, and my agents in their numbers, while they build. Both are good ways to grow.",
+  },
+  {
+    q: "Is there a contract?",
+    a: "No. Premium is month to month, and you can cancel anytime. I recommend three months to see the full benefit, but that's your call.",
+  },
+  {
+    q: "Do I need to apply or book a call first?",
+    a: "No. You can join directly.",
+  },
+  {
+    q: "What's the $1 Foyer?",
+    a: "It's the HTSA community on Skool for $1 a month. You get the tips I post on pricing, Google, and getting paid what the job is worth, and you can look around before you decide whether you need anything more.",
+  },
+  {
+    q: "Do you offer discounts or trials?",
+    a: "No. The price on this page is the price everyone pays.",
+  },
+];
+---
+
+<section class="faq section">
+  <div class="container faq__inner">
+    <h2 class="section-title">Questions</h2>
+    <div class="faq__list">
+      {faqs.map((item) => (
+        <details class="faq__item">
+          <summary class="faq__question">{item.q}</summary>
+          <p class="faq__answer">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    border-top: 1px solid var(--line-dark);
+  }
+
+  .faq__inner {
+    max-width: 720px;
+  }
+
+  .faq__list {
+    margin-top: var(--space-7);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .faq__item {
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+  }
+
+  .faq__question {
+    font-weight: 650;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__answer {
+    margin-top: var(--space-4);
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>

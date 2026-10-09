@@ -1,0 +1,45 @@
+---
+import { SKOOL_CTA, SKOOL_URL } from "../config";
+---
+
+<section id="join" class="claim section">
+  <div class="container claim__inner">
+    <h2 class="section-title">Claim your share.</h2>
+    <p>
+      The towers are handing their work to agents. Yours is still yours. Talk to MoneyPenny. Tell her what you do and where you want to take it, and she'll help you see if this is the right fit. Join the Skool when you want in.
+    </p>
+    <a class="btn-primary" href="#moneypenny">Talk to MoneyPenny</a>
+    <p class="claim__alt"><a href={SKOOL_URL}>{SKOOL_CTA}</a></p>
+  </div>
+</section>
+
+<style>
+  .claim {
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .claim__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    max-width: 40rem;
+  }
+
+  .claim p {
+    font-size: 1.2rem;
+    color: var(--muted-on-dark);
+  }
+
+  .claim__alt a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: var(--font-body);
+  }
+
+  .claim__alt a:hover {
+    color: var(--yellow);
+  }
+</style>

@@ -1,0 +1,195 @@
+---
+import CallButton from "./CallButton.astro";
+import { SKOOL_URL, SKOOL_CTA, PHONE_E164 } from "../config";
+
+const hasPhone = PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
+
+const links = [
+  { href: "#curriculum", label: "Curriculum" },
+  { href: "#proof", label: "Proof" },
+  { href: "#packages", label: "Packages" },
+  { href: "#why-us", label: "Why us" },
+  { href: "#moneypenny-chat", label: "Ask" },
+];
+---
+
+<nav class="nav" aria-label="Primary">
+  <div class="nav-pill">
+    <a class="nav-brand" href="#">The Agency</a>
+
+    <details class="nav-menu">
+      <summary class="nav-menu__toggle" aria-label="Menu">Menu</summary>
+      <div class="nav-links">
+        {links.map((link) => (
+          <a class="nav-link" href={link.href}>{link.label}</a>
+        ))}
+      </div>
+    </details>
+
+    <div class="nav-links nav-links--desktop">
+      {links.map((link) => (
+        <a class="nav-link" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+
+    <div class="nav-actions">
+      {hasPhone && <CallButton />}
+      <a class="btn-primary nav-cta" href={SKOOL_URL}><span class="nav-cta__full">{SKOOL_CTA}</span><span class="nav-cta__short">SKOOL FOYER</span></a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 50;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1120px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  }
+
+  .nav-brand {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav-link {
+    font-size: var(--font-small);
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .nav-link:hover {
+    color: var(--ink);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-cta {
+    white-space: nowrap;
+    padding: 10px 18px;
+    font-size: 0.75rem;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-menu__toggle {
+    list-style: none;
+    cursor: pointer;
+    font-size: var(--font-small);
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-dark);
+  }
+
+  .nav-menu__toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-menu .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: var(--space-3);
+  }
+
+  .nav-cta__short {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .nav {
+      top: 12px;
+      left: 12px;
+      right: 12px;
+    }
+
+    .nav-pill {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 8px 8px 8px 16px;
+    }
+
+    .nav-links--desktop {
+      display: none;
+    }
+
+    .nav-menu {
+      display: block;
+      position: relative;
+      margin-right: auto;
+    }
+
+    .nav-menu[open] .nav-links {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: -8px;
+      min-width: 180px;
+      padding: var(--space-3) var(--space-4);
+      gap: var(--space-3);
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-actions {
+      flex-wrap: nowrap;
+    }
+
+    .nav-actions :global(.btn-call) {
+      display: none;
+    }
+
+    .nav-cta {
+      padding: 9px 14px;
+    }
+
+    .nav-cta__full {
+      display: none;
+    }
+
+    .nav-cta__short {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+  }
+</style>
