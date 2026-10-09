@@ -1,0 +1,8 @@
+/webinar
+  X-Robots-Tag: noindex, nofollow
+
+/webinar/
+  X-Robots-Tag: noindex, nofollow
+
+/webinar/*
+  X-Robots-Tag: noindex, nofollow

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for the free webinar | High Ticket Service Academy</title>
+    <meta name="description" content="Application for the free High Ticket Service Academy webinar.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://hightickethomeservices.com/webinar/apply">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/webinar/styles.css">
+</head>
+<body>
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="/" class="nav-brand">THE AGENCY</a>
+            <div class="nav-links">
+                <a href="/webinar" class="nav-home">Webinar</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="apply-wrap">
+        <div class="container">
+            <p class="section-label">Free webinar</p>
+            <div class="gold-line"></div>
+            <h1>Apply for the free webinar</h1>
+            <p class="lede">Answer these seven questions. This form does not take payment.</p>
+
+            <div id="thanks" hidden>
+                <h2 tabindex="-1">Application received</h2>
+                <p>I have your answers. The webinar is free.</p>
+                <p>Date: [WEBINAR DATE]</p>
+                <p>Zoom: [ZOOM LINK]</p>
+                <p><a href="/webinar">Back to the webinar page</a></p>
+            </div>
+
+            <form id="apply-form" class="application" action="/api/webinar-apply" method="post" novalidate>
+                <p id="form-error" class="form-error" hidden role="alert"></p>
+
+                <div class="q">
+                    <h2><label for="trade">What trade or service do you run, and what's the job you most want to sell more of?</label></h2>
+                    <textarea id="trade" name="trade" required maxlength="2000"></textarea>
+                    <p class="field-error" data-for="trade"></p>
+                </div>
+
+                <div class="q">
+                    <h2><label for="area">What city or area do you serve, and which neighborhoods do you most want to work in?</label></h2>
+                    <textarea id="area" name="area" required maxlength="2000"></textarea>
+                    <p class="field-error" data-for="area"></p>
+                </div>
+
+                <fieldset class="q">
+                    <h2>Roughly where is the business today in annual revenue?</h2>
+                    <label class="choice"><input type="radio" name="revenue" value="Under $100k" required><span>Under $100k</span></label>
+                    <label class="choice"><input type="radio" name="revenue" value="$100k–$250k"><span>$100k–$250k</span></label>
+                    <label class="choice"><input type="radio" name="revenue" value="$250k–$500k"><span>$250k–$500k</span></label>
+                    <label class="choice"><input type="radio" name="revenue" value="$500k–$1M"><span>$500k–$1M</span></label>
+                    <label class="choice"><input type="radio" name="revenue" value="Over $1M"><span>Over $1M</span></label>
+                    <label class="choice"><input type="radio" name="revenue" value="Prefer not to say"><span>Prefer not to say</span></label>
+                    <p class="field-error" data-for="revenue"></p>
+                </fieldset>
+
+                <fieldset class="q">
+                    <h2>Who does the work right now?</h2>
+                    <label class="choice"><input type="radio" name="who" value="Just me" required><span>Just me</span></label>
+                    <label class="choice"><input type="radio" name="who" value="Me plus a helper or two"><span>Me plus a helper or two</span></label>
+                    <label class="choice"><input type="radio" name="who" value="I have a crew and I run the business side"><span>I have a crew and I run the business side</span></label>
+                    <label class="choice"><input type="radio" name="who" value="Someone else runs it day to day"><span>Someone else runs it day to day</span></label>
+                    <p class="field-error" data-for="who"></p>
+                </fieldset>
+
+                <fieldset class="q">
+                    <h2>What's running today for marketing?</h2>
+                    <p class="hint">Check all that apply.</p>
+                    <label class="choice"><input type="checkbox" name="marketing" value="Google Business Profile"><span>Google Business Profile</span></label>
+                    <label class="choice"><input type="checkbox" name="marketing" value="A website"><span>A website</span></label>
+                    <label class="choice"><input type="checkbox" name="marketing" value="City or service pages"><span>City or service pages</span></label>
+                    <label class="choice"><input type="checkbox" name="marketing" value="Google Ads"><span>Google Ads</span></label>
+                    <label class="choice"><input type="checkbox" name="marketing" value="Facebook or other ads"><span>Facebook or other ads</span></label>
+                    <label class="choice"><input type="checkbox" name="marketing" value="Nothing yet"><span>Nothing yet</span></label>
+                    <p class="field-error" data-for="marketing"></p>
+                </fieldset>
+
+                <fieldset class="q">
+                    <h2>For six weeks, can you show up to a weekly live call and put in a few hours each week making changes to your own profile, pages, ads, and phone process?</h2>
+                    <label class="choice"><input type="radio" name="sixWeeks" value="Yes, I'll do the work" required><span>Yes, I'll do the work</span></label>
+                    <label class="choice"><input type="radio" name="sixWeeks" value="Probably, depends on the season"><span>Probably, depends on the season</span></label>
+                    <label class="choice"><input type="radio" name="sixWeeks" value="No, I'm looking for someone to do it for me"><span>No, I'm looking for someone to do it for me</span></label>
+                    <p class="field-error" data-for="sixWeeks"></p>
+                </fieldset>
+
+                <div class="q">
+                    <h2><label for="weekOne">If you got in, what's the first thing you'd change in week one, and why now?</label></h2>
+                    <textarea id="weekOne" name="weekOne" required maxlength="4000"></textarea>
+                    <p class="field-error" data-for="weekOne"></p>
+                </div>
+
+                <button class="btn-primary" type="submit">Submit application</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 THE MOUNTING MAN. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('apply-form');
+        const thanks = document.getElementById('thanks');
+        const formError = document.getElementById('form-error');
+
+        function clearErrors() {
+            formError.hidden = true;
+            formError.textContent = '';
+            document.querySelectorAll('.field-error').forEach((el) => { el.textContent = ''; });
+        }
+
+        function showErrors(errors) {
+            Object.entries(errors || {}).forEach(([key, message]) => {
+                const slot = document.querySelector('.field-error[data-for="' + key + '"]');
+                if (slot) slot.textContent = message;
+            });
+        }
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            clearErrors();
+            const button = form.querySelector('button[type="submit"]');
+            const data = {
+                trade: form.trade.value,
+                area: form.area.value,
+                revenue: (form.querySelector('input[name="revenue"]:checked') || {}).value || '',
+                who: (form.querySelector('input[name="who"]:checked') || {}).value || '',
+                marketing: Array.from(form.querySelectorAll('input[name="marketing"]:checked')).map((el) => el.value),
+                sixWeeks: (form.querySelector('input[name="sixWeeks"]:checked') || {}).value || '',
+                weekOne: form.weekOne.value
+            };
+            button.disabled = true;
+            try {
+                const response = await fetch('/api/webinar-apply', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json', 'accept': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const body = await response.json().catch(() => ({}));
+                if (response.ok && body.ok) {
+                    form.hidden = true;
+                    thanks.hidden = false;
+                    thanks.querySelector('h2').focus();
+                    return;
+                }
+                if (body.errors) showErrors(body.errors);
+                formError.hidden = false;
+                formError.textContent = body.message || 'The application was not saved.';
+            } catch (err) {
+                formError.hidden = false;
+                formError.textContent = 'The application was not saved. Try again.';
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
