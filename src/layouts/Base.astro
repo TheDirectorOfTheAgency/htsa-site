@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  robots?: string;
+}
+
+const {
+  title = "The Agency | Community & Done-With-You for home service owners",
+  description = "Three ways in. The HTSA community is $1/month. The Roadmap Course (High-Ticket Service Academy) is $497 one-time with lifetime access. Founding-member Done-With-You is $1,997/month: we set up your agents and whole system the way The Mounting Man runs, with weekly live calls with Marshall and personal access. Month to month. Cancel anytime. Everything inside is included at $1,997/mo: every course, system, and resource, now and anything added later, for as long as you stay subscribed.",
+  robots,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="dns-prefetch" href="https://api.x.ai" />
+    <link rel="preconnect" href="https://api.x.ai" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script src="/meta-pixel.js" defer></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

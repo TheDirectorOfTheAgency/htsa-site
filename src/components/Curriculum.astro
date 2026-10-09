@@ -1,0 +1,133 @@
+---
+import { BEFORE_MODULES, CURRICULUM } from "../data/curriculum";
+---
+
+<section id="curriculum" class="curriculum section">
+  <div class="container">
+    <p class="eyebrow">Inside the Academy</p>
+    <h2 class="section-title">The other half of the moat</h2>
+    <p class="curriculum__intro">
+      Your hands already do the part AI can't. Everything inside is the other half of the moat: the business.
+    </p>
+    <aside class="curriculum__before">
+      <p class="curriculum__before-label">Before the modules</p>
+      {BEFORE_MODULES.map((track) => (
+        <p class="curriculum__track">
+          <span class="curriculum__track-title">{track.title}</span>
+          <span class="curriculum__track-count">
+            {track.title === "Intro"
+              ? `${track.lessons.length} lessons, including AI vs. The Trades`
+              : `${track.lessons.length} lessons`}
+          </span>
+          <span class="curriculum__track-lessons">{track.lessons.join(" · ")}</span>
+        </p>
+      ))}
+    </aside>
+    <div class="curriculum__grid">
+      {CURRICULUM.map((mod) => (
+        <article class="module-card">
+          <p class="module-card__num">{String(mod.number).padStart(2, "0")}</p>
+          <h3 class="module-card__title">{mod.title}</h3>
+          <p class="module-card__summary">{mod.summary}</p>
+          {mod.lessons.length > 0 && (
+            <ul>
+              {mod.lessons.map((lesson) => (
+                <li>{lesson}</li>
+              ))}
+            </ul>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .curriculum {
+    background: var(--white);
+  }
+
+  .curriculum .eyebrow {
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .curriculum__intro {
+    max-width: 38rem;
+    margin: var(--space-4) 0 var(--space-5);
+    font-size: 1.15rem;
+  }
+
+  .curriculum__before {
+    margin-bottom: var(--space-6);
+    max-width: 46rem;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .curriculum__before-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--font-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .curriculum__track {
+    display: grid;
+    gap: 4px;
+  }
+
+  .curriculum__track-title {
+    font-weight: 650;
+  }
+
+  .curriculum__track-count,
+  .curriculum__track-lessons {
+    color: var(--muted);
+    font-size: var(--font-small);
+  }
+
+  .curriculum__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .module-card {
+    background: var(--grey-card);
+    border-radius: var(--radius-card);
+    padding: var(--space-5);
+  }
+
+  .module-card__num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--font-eyebrow);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .module-card__title {
+    font-size: var(--font-card);
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2);
+  }
+
+  .module-card__summary {
+    color: var(--muted);
+  }
+
+  .module-card ul {
+    margin-top: var(--space-4);
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 6px;
+  }
+
+  @media (min-width: 800px) {
+    .curriculum__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

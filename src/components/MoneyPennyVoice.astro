@@ -1,0 +1,202 @@
+---
+const mic = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M5 11a7 7 0 0014 0M12 18v3M8 21h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+---
+
+<div class="ask-card" id="moneypenny-chat">
+  <div class="ask-card__head">
+    <span class="ask-card__dot" aria-hidden="true"></span>
+    <p class="ask-card__name">MoneyPenny <span>Mr. Wayne's AI chief of staff</span></p>
+  </div>
+
+  <div class="ask-card__log" data-chat-log role="log" aria-live="polite">
+    <div class="msg msg--mp">
+      <p class="msg__text">I'm MoneyPenny, Mr. Wayne's chief of staff. Questions come through me. Tell me what you do and where, like "HVAC, Dallas" or "plumbing, Scottsdale," and I'll show you where the high-ticket money is. Or paste your website and I'll tell you what it's missing.</p>
+    </div>
+  </div>
+
+  <form class="ask-card__form" data-chat-form>
+    <label class="sr-only" for="mp-input">Message MoneyPenny</label>
+    <textarea id="mp-input" data-chat-input rows="1" maxlength="2000" placeholder="Your trade and city, or your website address…"></textarea>
+    <button class="btn-send" type="submit" aria-label="Send">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </form>
+
+  <div id="moneypenny" class="voice-row" data-state="idle">
+    <div class="voice-row__panel" data-panel="idle">
+      <button class="btn-mic" type="button" aria-label="Start voice call with MoneyPenny"><Fragment set:html={mic} /><span>Talk to MoneyPenny</span></button>
+      <span class="voice-row__hint">Prefer to talk? Start a live voice call.</span>
+    </div>
+    <div class="voice-row__panel" data-panel="connecting">
+      <button class="btn-mic" type="button" disabled aria-label="Connecting"><Fragment set:html={mic} /></button>
+      <span class="voice-row__status">Connecting to MoneyPenny…</span>
+    </div>
+    <div class="voice-row__panel" data-panel="live">
+      <span class="voice-row__live" aria-hidden="true"></span>
+      <span class="voice-row__status">MoneyPenny is live.</span>
+      <button class="btn-end" type="button">End call</button>
+    </div>
+    <div class="voice-row__panel" data-panel="error">
+      <span class="voice-row__error" data-error-text></span>
+      <button class="btn-retry" type="button">Try again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initMoneyPennyVoice } from "../scripts/moneypenny-voice";
+  import { initMoneyPennyChat } from "../scripts/moneypenny-chat";
+  initMoneyPennyVoice(document.getElementById("moneypenny")!);
+  initMoneyPennyChat(document.getElementById("moneypenny-chat")!);
+</script>
+
+<style is:global>
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .ask-card .msg { display: flex; flex-direction: column; gap: 6px; max-width: 92%; }
+  .ask-card .msg--mp { align-self: flex-start; }
+  .ask-card .msg--you { align-self: flex-end; }
+  .ask-card .msg__text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 10px 14px;
+    border-radius: 16px;
+    user-select: text;
+  }
+  .ask-card .msg--mp .msg__text { background: rgba(255, 255, 255, 0.08); color: var(--white); border-top-left-radius: 4px; }
+  .ask-card .msg--you .msg__text { background: var(--yellow); color: var(--yellow-ink); border-top-right-radius: 4px; }
+  .ask-card .msg__text a { color: var(--yellow); text-decoration: underline; }
+  .ask-card .msg__copy {
+    align-self: flex-start;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted-on-dark);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    min-height: 26px;
+  }
+  .ask-card .msg__copy:hover { color: var(--white); }
+  .ask-card .msg--typing .msg__text::after { content: "▍"; animation: mpblink 1s steps(1) infinite; }
+  .ask-card .sitecheck {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--white);
+  }
+  .ask-card .sitecheck__head { font-weight: 650; margin-bottom: 6px; color: var(--yellow); }
+  .ask-card .sitecheck ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+  .ask-card .sitecheck li { padding-left: 20px; position: relative; word-break: break-word; }
+  .ask-card .sitecheck li::before { position: absolute; left: 0; font-weight: 700; }
+  .ask-card .sitecheck li.is-ok::before { content: "✓"; color: #3ddc84; }
+  .ask-card .sitecheck li.is-bad::before { content: "✗"; color: #ff6b6b; }
+  .ask-card .sitecheck li.is-info::before { content: "•"; color: var(--muted-on-dark); }
+  @keyframes mpblink { 50% { opacity: 0; } }
+</style>
+
+<style>
+  .ask-card {
+    width: 100%;
+    max-width: 680px;
+    margin-inline: auto;
+    padding: var(--space-4);
+    border-radius: var(--radius-ask);
+    background: var(--glass);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+  }
+  .ask-card__head { display: flex; align-items: center; gap: 10px; }
+  .ask-card__dot { width: 9px; height: 9px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 4px rgba(61, 220, 132, 0.18); }
+  .ask-card__name { font-weight: 650; color: var(--white); font-size: 15px; }
+  .ask-card__name span { font-weight: 400; color: var(--muted-on-dark); margin-left: 6px; font-size: 13px; }
+  .ask-card__log {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 380px;
+    min-height: 90px;
+    overflow-y: auto;
+    padding: 4px 2px;
+    overscroll-behavior: contain;
+  }
+  .ask-card__form {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 6px 6px 6px 14px;
+  }
+  .ask-card__form:focus-within { border-color: var(--yellow); }
+  .ask-card__form textarea {
+    flex: 1;
+    resize: none;
+    background: transparent;
+    border: 0;
+    outline: none;
+    color: var(--white);
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 8px 0;
+    max-height: 160px;
+  }
+  .ask-card__form textarea::placeholder { color: var(--muted-on-dark); }
+  .btn-send {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--yellow);
+    color: var(--yellow-ink);
+  }
+  .btn-send:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .voice-row__panel { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .voice-row__hint, .voice-row__status { font-size: var(--font-small); color: var(--muted-on-dark); }
+  .voice-row__error { font-size: var(--font-small); color: var(--danger); flex: 1; min-width: 200px; }
+  .voice-row__live { width: 10px; height: 10px; border-radius: 50%; background: #ff4d4d; animation: mpblink 1.2s steps(1) infinite; }
+
+  .btn-mic, .btn-end, .btn-retry {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font-size: var(--font-button);
+    font-weight: 650;
+    letter-spacing: 0.04em;
+  }
+  .btn-mic { background: transparent; color: var(--white); border: 1px solid var(--yellow); }
+  .btn-mic:hover { background: rgba(255, 255, 255, 0.06); }
+  .btn-mic:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-end { background: var(--white); color: var(--ink); }
+  .btn-retry { background: transparent; color: var(--white); border: 1px solid var(--line); }
+
+  .voice-row[data-state="idle"] [data-panel]:not([data-panel="idle"]),
+  .voice-row[data-state="connecting"] [data-panel]:not([data-panel="connecting"]),
+  .voice-row[data-state="live"] [data-panel]:not([data-panel="live"]),
+  .voice-row[data-state="error"] [data-panel]:not([data-panel="error"]) { display: none; }
+
+  @media (max-width: 767px) {
+    .ask-card { padding: 14px; }
+    .ask-card__log { max-height: 320px; }
+    .ask-card__name span { display: none; }
+  }
+</style>

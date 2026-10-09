@@ -1,0 +1,87 @@
+---
+import CallButton from "./CallButton.astro";
+import { PHONE_E164, SKOOL_URL, SKOOL_CTA } from "../config";
+
+const hasPhone = PHONE_E164 !== null && /^\+[1-9]\d{7,14}$/.test(PHONE_E164);
+---
+
+<section class="close section">
+  <div class="container close__grid">
+    <a class="close__card close__card--grey" href="#moneypenny">
+      <span class="close__label">Talk to MoneyPenny</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    {hasPhone ? (
+      <div class="close__card close__card--black">
+        <span class="close__label">Call now</span>
+        <CallButton />
+      </div>
+    ) : (
+      <div class="close__card close__card--black">
+        <span class="close__label">Join the community for $1/month</span>
+        <a class="btn-primary" href={SKOOL_URL}>{SKOOL_CTA}</a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .close {
+    padding-block: var(--space-8);
+  }
+
+  .close__grid {
+    display: grid;
+    gap: 4px;
+  }
+
+  .close__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-7) var(--space-6);
+    border-radius: var(--radius-card);
+    min-height: 120px;
+  }
+
+  .close__card--grey {
+    background: var(--grey-card);
+    color: var(--ink);
+    transition: opacity 0.2s;
+  }
+
+  .close__card--grey:hover {
+    opacity: 0.92;
+  }
+
+  .close__card--black {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .close__label {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+
+  .close__card--black .btn-call {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--white);
+  }
+
+  .close__card--black .btn-call:disabled {
+    color: var(--muted-on-dark);
+  }
+
+  @media (min-width: 768px) {
+    .close__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
