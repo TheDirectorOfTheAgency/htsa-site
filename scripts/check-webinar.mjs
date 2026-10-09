@@ -72,8 +72,16 @@ function missing(haystack, needles) {
 }
 
 const problems = [];
-const landingMissing = missing(landing, requiredLanding);
+const landingText = landing.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+const copyNeedles = requiredLanding.filter((s) => !s.startsWith("href=") && !s.startsWith("content="));
+const markupNeedles = requiredLanding.filter((s) => s.startsWith("href=") || s.startsWith("content="));
+const landingMissing = [
+  ...missing(landingText, copyNeedles),
+  ...missing(landing, markupNeedles),
+];
 if (landingMissing.length) problems.push(["landing missing", landingMissing]);
+if (landing.includes("hero.jpg") || apply.includes("hero.jpg")) problems.push(["webinar still uses hero.jpg"]);
+if (!landing.includes('src="/images/hero-marshall.webp"')) problems.push(["missing live hero image"]);
 const applyMissing = missing(apply, questions);
 if (applyMissing.length) problems.push(["apply missing", applyMissing]);
 

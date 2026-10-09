@@ -13,45 +13,45 @@
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/webinar/styles.css">
 </head>
-<body class="page-webinar">
-    <nav class="nav">
+<body>
+    <header class="site-nav">
         <div class="container nav-inner">
-            <a href="/" class="nav-brand">THE AGENCY</a>
-            <div class="nav-links">
-                <a href="/" class="nav-home">Home</a>
-                <a href="/webinar/apply" class="btn-primary">Apply for the free webinar</a>
-            </div>
+            <a href="/" class="nav-brand">High-Ticket Service Academy</a>
+            <a href="/webinar/apply" class="btn-primary nav-apply">Apply for the free webinar</a>
         </div>
-    </nav>
+    </header>
 
-    <header class="hero">
-        <div class="hero-media">
-            <img class="hero-photo" src="/hero.jpg" alt="Marshall Wayne holding a mounted television">
+    <section class="hero">
+        <div class="asset-slot asset-slot--image hero-photo">
+            <img src="/images/hero-marshall.webp" srcset="/images/hero-marshall-900.webp 900w, /images/hero-marshall.webp 1792w" sizes="100vw" alt="Marshall Wayne seated in a director's chair holding a drill in front of a wall of stacked TVs" fetchpriority="high" decoding="async">
         </div>
-        <div class="container hero-copy">
-            <div class="hero-panel">
-            <p class="hero-eyebrow">High Ticket Service Academy · Live</p>
-            <h1>The high-ticket system I use at The Mounting Man. Live, with me.</h1>
-            <p class="hero-body">In about 90 minutes I'll walk you through how I get found by clients in the wealthier neighborhoods and book the jobs worth taking. Google Business Profile, city and service pages built from real install data, Google Ads that don't waste money, and a lead desk that answers fast. Then we build your 30-day plan together, live.</p>
+        <div class="hero__inner container">
+            <div class="hero__badge">
+                <span>Owner-operator</span>
+                <span class="hero__badge-right">I do the installs</span>
+            </div>
+            <p class="eyebrow hero__eyebrow">High Ticket Service Academy · Live</p>
+            <h1 class="hero__title">The high-ticket system I use at The Mounting Man. <span class="accent">Live, with me.</span></h1>
+            <p class="hero__sub">In about 90 minutes I'll walk you through how I get found by clients in the wealthier neighborhoods and book the jobs worth taking. Google Business Profile, city and service pages built from real install data, Google Ads that don't waste money, and a lead desk that answers fast. Then we build your 30-day plan together, live.</p>
             <div class="meta-row">
                 <p class="placeholder-chip"><strong>Placeholder · date</strong>[WEBINAR DATE]</p>
                 <p class="placeholder-chip"><strong>Placeholder · Zoom</strong>[ZOOM LINK]</p>
             </div>
-            <a href="/webinar/apply" class="btn-primary">Apply for the free webinar</a>
-            <p class="free-line">Free to attend. You apply. There is no checkout on this page.</p>
+            <div class="hero-cta">
+                <a class="btn-primary" href="/webinar/apply">Apply for the free webinar</a>
+                <p class="hero-cta__note">Free to attend. You apply. There is no checkout on this page.</p>
             </div>
         </div>
-    </header>
+    </section>
 
-    <section class="block alt">
-        <div class="container">
-            <p class="section-label">What you leave with</p>
-            <div class="gold-line"></div>
-            <h2>A written 30-day plan</h2>
-            <p class="prose">A written 30-day plan for your trade and your service area. You'll know what to fix first on your profile, which pages to build first, how a lean ads account should look, and what has to happen in the first five minutes after a lead comes in.</p>
+    <section class="section section--light" id="leave-with">
+        <div class="container prose-block">
+            <p class="eyebrow">What you leave with</p>
+            <h2 class="section-title">A written 30-day plan</h2>
+            <p>A written 30-day plan for your trade and your service area. You'll know what to fix first on your profile, which pages to build first, how a lean ads account should look, and what has to happen in the first five minutes after a lead comes in.</p>
             <ul class="leave-list">
                 <li>What to fix first on your profile</li>
                 <li>Which pages to build first</li>
@@ -61,12 +61,11 @@
         </div>
     </section>
 
-    <section class="block">
+    <section class="section section--proof" id="why-me">
         <div class="container">
-            <p class="section-label">Why me</p>
-            <div class="gold-line"></div>
-            <h2>I still do the installs</h2>
-            <p class="prose">I built The Mounting Man with no employees, and I still do the installs.</p>
+            <p class="eyebrow">Why me</p>
+            <h2 class="section-title">I still do the installs</h2>
+            <p class="lead">I built The Mounting Man with no employees, and I still do the installs.</p>
             <div class="proof-grid">
                 <article class="proof-card">
                     <div class="num">$6,458.10</div>
@@ -85,43 +84,36 @@
                     <div class="label">Best year · 2024</div>
                 </article>
             </div>
-            <p class="prose">Those are my numbers and my proof. They're not a promise about yours.</p>
+            <p class="lead">Those are my numbers and my proof. They're not a promise about yours.</p>
         </div>
     </section>
 
-    <section class="block alt">
-        <div class="container">
-            <p class="section-label">Who it's for</p>
-            <div class="gold-line"></div>
-            <h2>Owner-operators</h2>
-            <p class="prose">Owner-operators who are good at the trade and ready to do the business side themselves. If you want someone to do it all for you, this isn't it.</p>
+    <section class="section section--light" id="who">
+        <div class="container prose-block">
+            <p class="eyebrow">Who it's for</p>
+            <h2 class="section-title">Owner-operators</h2>
+            <p>Owner-operators who are good at the trade and ready to do the business side themselves. If you want someone to do it all for you, this isn't it.</p>
         </div>
     </section>
 
-    <section class="block" id="six-week">
-        <div class="container">
-            <p class="section-label">After the webinar</p>
-            <div class="gold-line"></div>
-            <h2>Six weeks with me</h2>
-            <p class="prose">If you want to keep going with me, I'll explain the High Ticket Service Academy Six-Week Coaching Program. It's done with you, not done for you.</p>
+    <section class="section section--dark" id="six-week">
+        <div class="container prose-block">
+            <p class="eyebrow">After the webinar</p>
+            <h2 class="section-title">Six weeks with me</h2>
+            <p>If you want to keep going with me, I'll explain the High Ticket Service Academy Six-Week Coaching Program. It's done with you, not done for you.</p>
             <p class="price-line">$1,997 paid in full</p>
             <p class="price-note">Launch pricing. One payment.</p>
-            <a href="/webinar/apply" class="btn-primary">Apply for the free webinar</a>
+            <a class="btn-primary" href="/webinar/apply">Apply for the free webinar</a>
             <p class="link-placeholder"><strong>Placeholder · six-week join link</strong>[SIX-WEEK JOIN LINK]</p>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 THE MOUNTING MAN. ALL RIGHTS RESERVED.</p>
+            <p class="footer__brand">High-Ticket Service Academy</p>
+            <p>Taught by Marshall Wayne, owner-operator of The Mounting Man.</p>
+            <p>&copy; 2026 High-Ticket Service Academy. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        const nav = document.querySelector('.nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 60);
-        });
-    </script>
 </body>
 </html>
