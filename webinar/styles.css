@@ -370,21 +370,39 @@ button.btn-primary { width: 100%; }
     .proof-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 700px) {
-    .site-nav {
+    /* Live mobile hero has no top bar. The apply CTA stays under the copy. */
+    .site-nav { display: none; }
+    .hero { padding-top: 0; }
+    .hero-photo {
         position: relative;
-        background: var(--black);
+        inset: auto;
+        width: 100%;
+        height: 92vw;
+        min-height: 92vw;
     }
-    .nav-brand { font-size: .95rem; line-height: 1.15; }
-    .nav-apply {
-        padding: 10px 14px;
-        min-height: 44px;
-        white-space: normal;
-        text-align: center;
-        max-width: 11rem;
+    .hero-photo img {
+        position: relative;
+        inset: auto;
+        display: block;
+        width: 100%;
+        height: 92vw;
+        min-height: 92vw;
+        object-fit: cover;
+        object-position: 50% 40%;
+        -webkit-mask-image: none;
+        mask-image: none;
     }
-    .hero-photo { height: 92vw; }
-    .hero-photo img { object-position: 50% 40%; }
-    .hero { padding-top: calc(92vw * .8); }
+    .hero-photo::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 48%;
+        background: linear-gradient(180deg, transparent 0%, rgba(12, 12, 12, .45) 55%, #0c0c0c 100%);
+        pointer-events: none;
+    }
+    .hero__inner { margin-top: calc(92vw * -0.2); }
     .hero .btn-primary, .section--dark .btn-primary { width: 100%; }
 }
 @media (max-width: 480px) {
